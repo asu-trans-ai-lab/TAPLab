@@ -90,3 +90,48 @@ mathematical model.
   not flow reproduction).
 - `reference_fw` is deliberately slow (pure Python); large-network baselines
   come from native adapters until the C++ kernel lands.
+
+
+## 6. TAPForge: the controlled laboratory (from the 2026-07 expansion)
+
+`taplab forge` generates parametric instances; every manifest records the
+full parameter set and seed. Implemented: A0 two-route / diamond / Braess
+(the paradox reproduces exactly: 82.25 vs 66.00 min at UE), A2/A3 Manhattan
+grids with corridors, barriers, Braess diagonals, seeded cost perturbation,
+corner/uniform/radial demand, and the |O| x |D_o| factorial
+({1,4,16,all} x {1,4,16,all}). First controlled latent-atom result: on the
+route-rich grid12 (corridors+barrier+diagonal+perturbation), OL1 converges
+faster than explicit P0 (0.24 s vs 0.65 s to ~1e-5) with 63 active columns
+vs 195 after folding 525 into 12 atoms; on path-poor Sioux Falls the two are
+equivalent — compression pays exactly where the path space is rich.
+
+Planned per the expansion:
+- A1 origin-structure factorial as a formal experimental axis; common bush
+  representation with `orientation = origin | destination` (LUCE's
+  destination-oriented bushes via the transposed graph).
+- A4/A5 space-time and space-time-state DAG generators (movement, waiting,
+  pickup/delivery, charging, transfer, service-state arcs) with topological
+  DP as the canonical kernel; balanced designs, never the full Cartesian
+  product.
+- Kernel policy: label-setting Dijkstra (binary heap) is the canonical
+  static kernel; one-to-all per origin; transposed-graph Dijkstra for
+  destination orientation; Yen for static KSP; time-dependent label-setting
+  for FIFO; topological DP for DAGs; RAPTOR / Connection Scan for
+  schedule-based transit; multilabel with dominance for multicriteria
+  walk/bike. Two separate experiments: assignment benchmark (fixed kernel)
+  vs kernel benchmark (fixed assignment). External executables that cannot
+  adopt the kernel are `external_black_box`, compared end-to-end only.
+- Work counters per the Xie & Xie origin-based comparison protocol: node
+  scans, link relaxations, bush arcs, PAS structures, local node problems,
+  flow shifts, represented routes, time-to-each-verified-gap — runtime alone
+  cannot compare LUCE / B / TAPAS / iTAPAS fairly.
+- Latent-atom experiment ladder (8 arms): full explicit GP; major-only;
+  random grouping baseline; geometry route-family atoms;
+  signature-preserving atoms; major-latent with first-order refinement;
+  with quadratic refinement; with adaptive promotion/splitting. Restricted-
+  pool accuracy evaluates the representation; full-space first-order pricing
+  remains the certificate.
+- B1 canonical track additions from TransportationNetworks: Winnipeg,
+  Eastern Massachusetts, Austin; C1 schedule-based transit as a routing /
+  column-generation track first (time-expanded DP + RAPTOR oracles), with
+  capacity/crowding feedback as a later assignment model.

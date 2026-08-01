@@ -1,0 +1,5 @@
+name: diamond
+generator: TAPForge
+track: A0
+type: diamond
+demand: 4000.0

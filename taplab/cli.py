@@ -189,6 +189,11 @@ def main():
     p.add_argument("--gap-target", default=None)
     p.set_defaults(fn=cmd_verify)
 
+    p = sub.add_parser("forge", add_help=False)
+    p.set_defaults(fn=lambda a: __import__("taplab.forge", fromlist=["main"])
+                   .main(a.forge_args))
+    p.add_argument("forge_args", nargs=argparse.REMAINDER)
+
     p = sub.add_parser("bench")
     p.add_argument("instance")
     p.add_argument("--solvers", default="reference_fw")

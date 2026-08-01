@@ -1,0 +1,5 @@
+link_id,from_node_id,to_node_id,link_type,directed,length,lanes,capacity,free_speed,vdf_fftt,vdf_alpha,vdf_beta,allowed_uses
+1,1,2,centroid_connector,1,1,1,2000,30,5,0.15,4,auto
+2,1,3,centroid_connector,1,1,1,2000,30,8,0.15,4,auto
+3,2,4,arterial,1,1,1,2000,30,8,0.15,4,auto
+4,3,4,arterial,1,1,1,2000,30,5,0.15,4,auto

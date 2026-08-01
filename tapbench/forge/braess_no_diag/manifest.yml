@@ -1,0 +1,6 @@
+name: braess_no_diag
+generator: TAPForge
+track: A0
+type: braess
+demand: 4000.0
+with_diagonal: False

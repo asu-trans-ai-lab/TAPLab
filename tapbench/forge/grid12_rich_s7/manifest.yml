@@ -1,0 +1,14 @@
+name: grid12_rich_s7
+generator: TAPForge
+track: A2/A3
+type: grid
+n: 12
+pattern: uniform
+origins: 4
+dests_per_origin: 4
+corridors: 2
+barrier: True
+braess_diagonal: True
+perturb: 0.01
+congestion: medium
+seed: 7

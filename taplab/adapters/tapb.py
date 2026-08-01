@@ -21,6 +21,10 @@ def _to_tntp(instance, work, name):
     for r in instance.links:
         a, b = instance.link_key(r)
         cap = float(r["capacity"])
+        # tap-b uses capacity == 99999 as its ARTIFICIAL-arc sentinel and
+        # silently drops such links from the flows output; nudge past it
+        if cap == 99999.0:
+            cap = 99998.0
         length = float(r["length"])
         fs = float(r.get("free_speed") or 30) or 30
         fftt = float(r.get("vdf_fftt") or 0) or length / fs * 60.0

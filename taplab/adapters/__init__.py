@@ -2,12 +2,14 @@
 solve(instance, algorithm, gap, max_time) -> {flows, convergence, summary}."""
 from __future__ import annotations
 
-from . import reference_fw
+from . import latent_gp, reference_fw
 
 
 def get(name: str):
     if name == "reference_fw":
         return reference_fw
+    if name == "latent_gp":
+        return latent_gp
     if name == "taplite":
         from . import taplite
         return taplite
@@ -20,4 +22,4 @@ def get(name: str):
     raise KeyError(f"unknown adapter: {name}")
 
 
-AVAILABLE = ["reference_fw", "taplite", "tapb", "aequilibrae"]
+AVAILABLE = ["reference_fw", "latent_gp", "taplite", "tapb", "aequilibrae"]

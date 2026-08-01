@@ -54,6 +54,21 @@ def test_two_route_analytical_split():
     assert abs(flows[(1, 3)] - 1000.0) < 0.5, flows
 
 
+def test_latent_gp_two_route_and_sioux():
+    """latent_gp (P0/OL1) must hit the analytical split and certify on
+    Sioux Falls near the reference TSTT."""
+    from taplab.adapters import latent_gp
+    inst = Instance.load(ROOT / "tapbench" / "diagnostic" / "two_route")
+    out = latent_gp.solve(inst, algorithm="p0", gap=1e-8)
+    f = {(r["from_node_id"], r["to_node_id"]): r["volume"] for r in out["flows"]}
+    assert abs(f[(1, 2)] - 1000.0) < 0.5 and abs(f[(1, 3)] - 1000.0) < 0.5
+    inst = Instance.load(INST)
+    out = latent_gp.solve(inst, algorithm="ol1", gap=1e-6, max_time=60)
+    s = out["summary"]
+    assert s["relative_gap"] < 1e-5, s
+    assert abs(s["tstt"] - 7480000) < 5000, s
+
+
 def test_chicago_sketch_validates():
     rep = validate(Instance.load(ROOT / "tapbench" / "chicago_sketch"))
     assert rep["pass"], rep["errors"]

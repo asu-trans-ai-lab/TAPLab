@@ -103,7 +103,8 @@
   "input_format": "GMNS_TNTP",
   "output_format": "normalized_link_flow",
   "supports_convergence_history": true,
-  "status": "planned"
+  "status": "external_only",
+  "note": "controlled monotone-grid harness (origin_bush.exe); generates its own instances \u2014 research lane, not a TAPBench adapter. Native generalization: latent_gp"
  },
  "origin_bush:P0": {
   "family": "path_based",
@@ -111,7 +112,8 @@
   "input_format": "GMNS_TNTP",
   "output_format": "normalized_link_flow",
   "supports_convergence_history": true,
-  "status": "planned"
+  "status": "external_only",
+  "note": "controlled monotone-grid harness (origin_bush.exe); generates its own instances \u2014 research lane, not a TAPBench adapter. Native generalization: latent_gp"
  },
  "origin_bush:OL1": {
   "family": "compressed_origin_bush",
@@ -119,6 +121,26 @@
   "input_format": "GMNS_TNTP",
   "output_format": "normalized_link_flow",
   "supports_convergence_history": true,
-  "status": "planned"
+  "status": "external_only",
+  "note": "controlled monotone-grid harness (origin_bush.exe); generates its own instances \u2014 research lane, not a TAPBench adapter. Native generalization: latent_gp"
+ },
+ "latent_gp:P0": {
+  "family": "path_based",
+  "algorithm": "Explicit-path GP (adaptive column generation, Gauss-Seidel diagonal Newton)",
+  "input_format": "GMNS",
+  "output_format": "GMNS",
+  "supports_convergence_history": true,
+  "status": "verified",
+  "provenance": "native TAPLab port of the origin_bush_latent research line (P0)"
+ },
+ "latent_gp:OL1": {
+  "family": "compressed_path",
+  "algorithm": "Latent-atom GP: explicit major columns + one nonnegative latent atom per OD",
+  "input_format": "GMNS",
+  "output_format": "GMNS",
+  "supports_convergence_history": true,
+  "status": "verified",
+  "provenance": "native TAPLab generalization of OL1 from the controlled monotone-grid experiment to arbitrary networks",
+  "note": "work counters: shortest_path_calls, columns_generated/folded, latent_atoms"
  }
 }

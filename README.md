@@ -32,6 +32,7 @@ TAPLab uses compact GMNS-compatible tables as its portable exchange layer while 
 | **TAPValidate** | `taplab/validate.py`, `taplab/stats.py` | Validator for network integrity, OD demand, assignment feasibility, and cross-solver consistency; publishes computed network statistics. |
 | **TAPView** | `taplab/view.py`, `taplab view` | Interactive TAP-specific network viewer: centroid / connector / physical layers, v/c and volume rendering, solver-difference overlays, per-link inspection across solvers. |
 | **TAPDashboard** | `taplab/dashboard.py`, `taplab dashboard` | Static HTML dashboard comparing algorithms, convergence histories, computational performance, and reproducibility status. |
+| **TAPForge** | `taplab/forge.py`, `taplab forge` | Parametric instance generator: analytical networks (diamond, Braess), Manhattan grids with corridors / barriers / Braess diagonals, O x D factorials, seeded perturbations — every manifest reproduces its instance. |
 | **TAPReports** | `taplab/reports.py` | Normalized run / comparison / experiment reports and the independent reproduce check. |
 
 ---
@@ -46,6 +47,9 @@ TAPLab uses compact GMNS-compatible tables as its portable exchange layer while 
 | Chicago Sketch | Intermediate | Cross-solver verification | Bundled with best-known flows |
 | Chicago Regional | Large | Performance and path-coverage analysis | Bundled (gzipped demand) with reference volumes |
 | Philadelphia | Large | Scalability and transferability testing | Bundled (gzipped demand) |
+| TAPForge A0–A3 | Diagnostic–controlled | Analytical correctness (Braess reproduces exactly) and route-rich latent-atom experiments | Bundled (`tapbench/forge/`) |
+| Washington DC driving | City, real OSM | Real topology: one-ways, connectors, SCC restriction | Bundled; certified with tap-b at 4.4e-6 |
+| Washington DC transit | City, multimodal | GTFS service network (WMATA + Circulator + Streetcar), TAZ access links, synthetic transit OD | Bundled (track C1) |
 | ARC Atlanta super-600 | Regional, simple mode | Physics-informed validation against agency reference volumes | Import via `import_arc_super600` (licensed data, never bundled) |
 
 Exact network statistics are never hard-coded in documentation. TAPValidate computes and publishes them directly from each imported instance:
@@ -103,6 +107,8 @@ TAPLab uses a registry-based design (`schemas/solver_registry.json`). Solver sou
 | --- | --- | --- | --- |
 | Link-based | Frank–Wolfe (pure Python) | built-in `reference_fw` | Verified (reproducibility anchor) |
 | Bush-based | Dial's Algorithm B | `tap-b` | End-to-end verified |
+| Path-based | Adaptive-column GP (`latent_gp --algorithm p0`) | built-in | Verified (Sioux Falls certified 9.6e-7; Anaheim 0.24% RMSE vs best-known) |
+| Compressed path | Latent-atom GP (`latent_gp --algorithm ol1`) | built-in | Verified; major columns + one latent atom per OD |
 | Link-based | MSA, FW, CFW, BFW | `tap-b` | Adapter pathway available |
 | Link-based | Frank–Wolfe | TAPLite | Registered (adapter present, not yet verified) |
 | Link-based | MSA, FW, CFW, BFW | AequilibraE | Registered (`pip install taplab[full]`, not yet verified) |
@@ -112,9 +118,9 @@ TAPLab uses a registry-based design (`schemas/solver_registry.json`). Solver sou
 | Bush-based | Algorithm B, BFW | TAsK | Planned (trips parser fix pending) |
 | Bush-based | iTAPAS | Open-TNM | Planned |
 | Other advanced methods | ALM-Greedy, C-BiTA, Greedy | Open-TNM | Planned |
-| Origin-bush | O0 fixed-bush Newton | `origin_bush_latent_cpp` | Planned |
-| Path-based | P0 explicit-path GP | `origin_bush_latent_cpp` | Planned |
-| Compressed origin-bush | OL1 latent-atom method | `origin_bush_latent_cpp` | Planned (research testing) |
+| Origin-bush | O0 fixed-bush Newton | `origin_bush_latent_cpp` | External research lane (controlled grid harness) |
+| Path-based | P0 explicit-path GP | `origin_bush_latent_cpp` | Ported natively as `latent_gp` |
+| Compressed origin-bush | OL1 latent-atom method | `origin_bush_latent_cpp` | Ported natively as `latent_gp` |
 
 The initial verified computational pathway is:
 
@@ -164,6 +170,10 @@ taplab view chicago_sketch
 # Independently certify a solver run: recomputed costs, Beckmann objective,
 # conservation, shortest-path lower bound, relative gap
 taplab verify chicago_sketch --solver tapb --gap-target 1e-4
+
+# Forge controlled instances (parameters + seed recorded in the manifest)
+taplab forge braess
+taplab forge grid --n 12 --pattern uniform --origins 4 --dests-per-origin 4     --corridors 2 --barrier --braess-diagonal --perturb 0.01 --seed 7
 
 # Independently re-verify an instance's reference outputs
 taplab reproduce tapbench/sioux_falls

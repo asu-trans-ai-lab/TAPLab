@@ -1,0 +1,14 @@
+name: grid10_corner_s1
+generator: TAPForge
+track: A2/A3
+type: grid
+n: 10
+pattern: corner
+origins: 0
+dests_per_origin: 0
+corridors: 0
+barrier: False
+braess_diagonal: False
+perturb: 0.0
+congestion: medium
+seed: 1
