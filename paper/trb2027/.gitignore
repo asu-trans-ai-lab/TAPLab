@@ -1,0 +1,5 @@
+build.log
+*.aux
+*.out
+*.synctex.gz
+figs/*.html
