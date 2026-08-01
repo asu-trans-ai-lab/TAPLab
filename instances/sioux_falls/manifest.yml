@@ -1,0 +1,11 @@
+name: sioux_falls
+title: Sioux Falls (classic academic instance)
+source: TNTP TransportationNetworks (bstabler) via CompressedTAP GMNS conversion
+zones: 24
+nodes: 24
+links: 76
+total_demand: 360600
+units: length_mi, speed_mph, fftt_min, capacity_veh_per_period
+centroid_convention: node_type=centroid; node_id = zone_id; centroids coincide with physical nodes (classic setup, no connectors)
+reference: reference/link_performance.csv = TNTP best-known UE volumes
+license: research use per TransportationNetworks repository
