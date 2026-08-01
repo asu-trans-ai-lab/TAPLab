@@ -45,7 +45,11 @@ TAPLab uses compact GMNS-compatible tables as its portable exchange layer while 
 | Sioux Falls | Small | Unit testing, debugging, reference verification | Bundled with best-known flows |
 | Anaheim | Small–medium | Classical equilibrium and algorithm testing | Bundled with best-known flows |
 | Chicago Sketch | Intermediate | Cross-solver verification | Bundled with best-known flows |
+| Winnipeg | Small–medium | Cross-solver reproducibility (best-known flows; note: published flows use a generalized cost with toll/distance factors) | Bundled |
+| Eastern Massachusetts | Small | Cross-solver reproducibility | Bundled |
+| Braess (TNTP canonical) | Diagnostic | The original demand-6 example | Bundled |
 | Chicago Regional | Large | Performance and path-coverage analysis | Bundled (gzipped demand) with reference volumes |
+| Austin | Large | Scalability (track B2) | Bundled (gzipped demand) |
 | Philadelphia | Large | Scalability and transferability testing | Bundled (gzipped demand) |
 | TAPForge A0–A3 | Diagnostic–controlled | Analytical correctness (Braess reproduces exactly) and route-rich latent-atom experiments | Bundled (`tapbench/forge/`) |
 | Washington DC driving | City, real OSM | Real topology: one-ways, connectors, SCC restriction | Bundled; certified with tap-b at 4.4e-6 |
@@ -112,10 +116,10 @@ TAPLab uses a registry-based design (`schemas/solver_registry.json`). Solver sou
 | Link-based | MSA, FW, CFW, BFW | `tap-b` | Adapter pathway available |
 | Link-based | Frank–Wolfe | TAPLite | Registered (adapter present, not yet verified) |
 | Link-based | MSA, FW, CFW, BFW | AequilibraE | Registered (`pip install taplab[full]`, not yet verified) |
-| Bush/origin-based | TAPAS | TAsK | Planned (trips parser fix pending) |
-| Origin-based | LUCE | TAsK | Planned (trips parser fix pending) |
-| Path-based | Gradient Projection | TAsK | Planned (trips parser fix pending) |
-| Bush-based | Algorithm B, BFW | TAsK | Planned (trips parser fix pending) |
+| Bush/origin-based | TAPAS | TAsK | Verified (certified on Chicago Sketch) |
+| Origin-based | LUCE | TAsK | Verified (certified on Chicago Sketch) |
+| Path-based | Gradient Projection | TAsK | Verified (certified on Chicago Sketch) |
+| Bush-based | Algorithm B, BFW | TAsK | Verified (certified on Chicago Sketch) |
 | Bush-based | iTAPAS | Open-TNM | Planned |
 | Other advanced methods | ALM-Greedy, C-BiTA, Greedy | Open-TNM | Planned |
 | Origin-bush | O0 fixed-bush Newton | `origin_bush_latent_cpp` | External research lane (controlled grid harness) |
@@ -133,7 +137,7 @@ GMNS
   → user-equilibrium verification
 ```
 
-On Chicago Sketch, this pathway preserves all 2,950 links and the total OD demand through the GMNS–TNTP round trip. The returned Algorithm B solution is certified by the independent validator at a recomputed relative gap of 2.9e-7, its total system travel time agrees with the independent Frank–Wolfe reference within 0.005%, and its link flows sit within 0.97% RMSE (of mean link flow) of the published best-known solution. On Anaheim the same pathway certifies at a recomputed gap of 5.1e-7 with 0.31% flow RMSE against the best-known solution, and on Chicago Regional at 5.6e-5 in 270 seconds. The TAsK adapters require one remaining parser correction so that generated TNTP trip tables exactly match TAsK's expected spacing and formatting.
+On Chicago Sketch, this pathway preserves all 2,950 links and the total OD demand through the GMNS–TNTP round trip. The returned Algorithm B solution is certified by the independent validator at a recomputed relative gap of 2.9e-7, its total system travel time agrees with the independent Frank–Wolfe reference within 0.005%, and its link flows sit within 0.97% RMSE (of mean link flow) of the published best-known solution. On Anaheim the same pathway certifies at a recomputed gap of 5.1e-7 with 0.31% flow RMSE against the best-known solution, and on Chicago Regional at 5.6e-5 in 270 seconds. All five TAsK algorithms (TAPAS, LUCE, GP, B, BFW) run through the adapter and are certified by the independent validator on Chicago Sketch. The historical "trips parser" blocker was diagnosed as two defects: TAsK's OD-matrix reader segfaults when a zone is absent from the origin sequence (every zone is now emitted as an Origin block, per TNTP convention), and fixed-decimal TNTP export formats silently zeroed tiny authoritative values such as the Braess 1e-8 free-flow time (all exporters now use full-precision %g).
 
 ---
 

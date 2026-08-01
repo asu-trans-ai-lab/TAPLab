@@ -19,7 +19,11 @@ def get(name: str):
     if name == "aequilibrae":
         from . import aequilibrae_adapter
         return aequilibrae_adapter
+    if name == "task":
+        from . import task_adapter
+        return task_adapter
     raise KeyError(f"unknown adapter: {name}")
 
 
-AVAILABLE = ["reference_fw", "latent_gp", "taplite", "tapb", "aequilibrae"]
+AVAILABLE = ["reference_fw", "latent_gp", "taplite", "tapb", "aequilibrae",
+             "task"]

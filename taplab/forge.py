@@ -169,6 +169,17 @@ def forge_grid(out: Path, n=10, pattern="corner", origins=0,
     if pattern == "corner":
         dem = [(corner[0], corner[1], round(scale * base_cap * 2, 1),
                 "AM", "auto")]
+    elif pattern == "one2many":     # A1: one origin, many destinations
+        dests = [z for z in zones if z != corner[0]]
+        dl = dests if dests_per_origin in (0, None) else \
+            rng.sample(dests, min(dests_per_origin, len(dests)))
+        dem = [(corner[0], d, round(scale * base_cap * 2 / len(dl), 2),
+                "AM", "auto") for d in dl]
+    elif pattern == "many2one":     # A1: many origins, one destination
+        ol = [z for z in zones if z != corner[1]]
+        ol = ol if origins in (0, None) else rng.sample(ol, min(origins, len(ol)))
+        dem = [(o, corner[1], round(scale * base_cap * 2 / len(ol), 2),
+                "AM", "auto") for o in ol]
     else:
         for o in olist:
             if pattern == "radial":
@@ -199,7 +210,8 @@ def main(argv=None):
     ap.add_argument("--no-diagonal", dest="with_diagonal", action="store_false")
     ap.add_argument("--n", type=int, default=10)
     ap.add_argument("--pattern", default="corner",
-                    choices=["corner", "uniform", "radial"])
+                    choices=["corner", "uniform", "radial",
+                             "one2many", "many2one"])
     ap.add_argument("--origins", type=int, default=0)
     ap.add_argument("--dests-per-origin", type=int, default=0)
     ap.add_argument("--corridors", type=int, default=0)

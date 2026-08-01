@@ -69,7 +69,7 @@ def build(src: Path, dst: Path, name=None, gzip_demand=False,
                 or (length / fs * 60.0 if fs > 0 else 0)
             w.writerow([r.get("link_id", ""), a, b, ltype, 1,
                         length, g(r, "lanes", default=1),
-                        g(r, "capacity"), fs, round(fftt, 6),
+                        g(r, "capacity"), fs, f"{fftt:.12g}",
                         g(r, "VDF_alpha", "vdf_alpha", default=0.15),
                         g(r, "VDF_beta", "vdf_beta", default=4.0), "auto"])
             if refw is not None:

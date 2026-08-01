@@ -58,7 +58,13 @@ def cmd_verify(a):
     lp = ROOT / "results" / inst_dir.name / a.solver / "link_performance.csv"
     if not lp.exists():
         sys.exit(f"no run found: {lp}")
-    rep = verify(inst, lp, gap_target=float(a.gap_target) if a.gap_target else None)
+    self_gap = None
+    sj = lp.parent / "summary.json"
+    if sj.exists():
+        self_gap = json.loads(sj.read_text()).get("relative_gap")
+    rep = verify(inst, lp,
+                 gap_target=float(a.gap_target) if a.gap_target else None,
+                 self_reported_gap=self_gap)
     (lp.parent / "validation_report.json").write_text(json.dumps(rep, indent=1))
     print(json.dumps(rep, indent=1))
     sys.exit(0 if rep["certified"] else 1)

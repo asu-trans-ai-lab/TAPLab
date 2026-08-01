@@ -16,7 +16,7 @@ import math
 from collections import defaultdict
 
 
-def verify(instance, lp_path, gap_target=None):
+def verify(instance, lp_path, gap_target=None, self_reported_gap=None):
     cents = instance.centroids()
     cent_nodes = set(cents.values())
 
@@ -139,5 +139,13 @@ def verify(instance, lp_path, gap_target=None):
         report["gap_target"] = gap_target
         report["meets_gap_target"] = rgap <= gap_target
         ok = ok and rgap <= gap_target
+    if self_reported_gap is not None and rgap is not None:
+        # a solver's claim must survive independent recomputation: allow an
+        # order of magnitude of definitional slack, no more
+        consistent = rgap <= max(10.0 * self_reported_gap,
+                                 self_reported_gap + 1e-6)
+        report["self_reported_gap"] = self_reported_gap
+        report["gap_consistent_with_self_report"] = consistent
+        ok = ok and consistent
     report["certified"] = ok
     return report

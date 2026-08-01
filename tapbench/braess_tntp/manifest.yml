@@ -1,0 +1,4 @@
+name: braess_tntp
+source: TNTP TransportationNetworks (bstabler), imported 2026-07-31 via taplab.converters
+centroid_convention: node_type=centroid; node_id = zone_id
+license: research use per TransportationNetworks repository

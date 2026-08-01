@@ -30,8 +30,10 @@ def _to_tntp(instance, work, name):
         fftt = float(r.get("vdf_fftt") or 0) or length / fs * 60.0
         B = float(r.get("vdf_alpha") or 0.15)
         P = float(r.get("vdf_beta") or 4.0)
-        lines.append(f"\t{renum[a]}\t{renum[b]}\t{cap:.4f}\t{length:.6f}"
-                     f"\t{fftt:.6f}\t{B:.4f}\t{P:.2f}\t{fs:.2f}\t0\t1\t;")
+        # full-precision %g: fixed-decimal formats silently zero out tiny
+        # authoritative values (e.g. Braess fftt = 1e-8, Winnipeg alphas)
+        lines.append(f"\t{renum[a]}\t{renum[b]}\t{cap:.12g}\t{length:.12g}"
+                     f"\t{fftt:.12g}\t{B:.12g}\t{P:.12g}\t{fs:.6g}\t0\t1\t;")
     netdir = work / "net"
     netdir.mkdir(exist_ok=True)
     # dedicated centroids must not carry through traffic: when the network
@@ -54,9 +56,11 @@ def _to_tntp(instance, work, name):
             by_o.setdefault(zid_of[o], {})[zid_of[d]] = v
             tot += v
     parts = [f"<NUMBER OF ZONES> {len(zone_nodes)}\n<TOTAL OD FLOW> {tot:.4f}\n<END OF METADATA>\n"]
-    for o in sorted(by_o):
+    # every zone appears as an Origin block, even with no demand — TNTP
+    # convention, and TAsK's OD-matrix indexing crashes on origin gaps
+    for o in range(1, len(zone_nodes) + 1):
         parts.append(f"\nOrigin {o}")
-        items = sorted(by_o[o].items())
+        items = sorted(by_o.get(o, {}).items())
         for i in range(0, len(items), 5):
             parts.append("    " + "".join(f"{d} : {v:.4f}; " for d, v in items[i:i + 5]))
     (netdir / f"{name}_trips.txt").write_text("\n".join(parts) + "\n")

@@ -71,8 +71,9 @@ def gmns2tntp(gmns_dir, out_dir, name, cap_per_lane=False):
             fftt = float(r.get("vdf_fftt") or 0) or length / fs * 60.0
             B = float(r.get("vdf_alpha") or 0.15)
             P = float(r.get("vdf_beta") or 4.0)
-            f.write(f"\t{a}\t{b}\t{cap:.4f}\t{length:.6f}\t{fftt:.6f}"
-                    f"\t{B:.4f}\t{P:.2f}\t{fs:.2f}\t0\t1\t;\n")
+            # full-precision %g: fixed-decimal formats zero out tiny values
+            f.write(f"\t{a}\t{b}\t{cap:.12g}\t{length:.12g}\t{fftt:.12g}"
+                    f"\t{B:.12g}\t{P:.12g}\t{fs:.6g}\t0\t1\t;\n")
 
     tot = 0.0
     by_o = {}
@@ -136,8 +137,8 @@ def tntp2gmns(net_txt, trips_txt, out_dir):
         # vdf_fftt carries the authoritative TNTP free-flow time; consumers
         # must prefer it over length/speed reconstruction
         for i, (a, b, cap, length, fs, B, P, fftt) in enumerate(links, 1):
-            w.writerow([i, a, b, f"{length:.6f}", 1, f"{cap:.4f}",
-                        f"{fs:.4f}", f"{fftt:.6f}", B, P])
+            w.writerow([i, a, b, f"{length:.12g}", 1, f"{cap:.12g}",
+                        f"{fs:.12g}", f"{fftt:.12g}", B, P])
     dem = []
     if trips_txt and Path(trips_txt).exists():
         cur_o = None
