@@ -200,10 +200,63 @@ def forge_grid(out: Path, n=10, pattern="corner", origins=0,
         congestion=congestion, seed=seed))
 
 
+def forge_sts(out: Path, n=5, T=20, congestion="medium", seed=1,
+              perturb=0.0):
+    """A4 space-time expanded network: an n x n spatial grid replicated over
+    T time steps. Movement arcs advance one cell and one step; waiting arcs
+    stay in place and advance one step (cheap, uncapacitated). One origin
+    centroid fans into the first T/2 departure slices at the corner cell;
+    one destination centroid collects every arrival slice at the opposite
+    corner. Static TAP on this DAG is joint departure-time + route choice —
+    the latent-atom stress case, since every departure slice multiplies the
+    path space."""
+    rng = random.Random(seed)
+    def nid(i, j, t):
+        return t * n * n + i * n + j + 1
+    nodes = [[90001, "centroid", 1, -1.5, 1.0], [90002, "centroid", 2,
+             n + 0.5, -(n - 1) - 1.0]]
+    for t in range(T):
+        for i in range(n):
+            for j in range(n):
+                nodes.append([nid(i, j, t), "intersection", "",
+                              j + 0.02 * t, -i - 0.02 * t])
+    links = []
+    lid = 0
+
+    def add(a, b, ltype, cap, fftt):
+        nonlocal lid
+        lid += 1
+        links.append([lid, a, b, ltype, 1, 1.0, 1, cap, 30,
+                      round(fftt, 6), 0.15, 4.0, "auto"])
+
+    base_cap, move_fftt, wait_fftt = 600.0, 2.0, 0.5
+    for t in range(T - 1):
+        for i in range(n):
+            for j in range(n):
+                f = move_fftt * (1 + perturb * (rng.random() - 0.5) * 2) \
+                    if perturb else move_fftt
+                for di, dj in ((0, 1), (1, 0), (0, -1), (-1, 0)):
+                    i2, j2 = i + di, j + dj
+                    if 0 <= i2 < n and 0 <= j2 < n:
+                        add(nid(i, j, t), nid(i2, j2, t + 1), "movement",
+                            base_cap, f)
+                add(nid(i, j, t), nid(i, j, t + 1), "waiting", 1e5, wait_fftt)
+    for t in range(T // 2):                       # departures
+        add(90001, nid(0, 0, t), "centroid_connector", 1e5, 0.1)
+    for t in range(T):                            # arrivals
+        add(nid(n - 1, n - 1, t), 90002, "centroid_connector", 1e5, 0.1)
+    scale = dict(low=0.3, medium=0.7, high=1.1)[congestion]
+    dem = [(1, 2, round(scale * base_cap * (T // 2) * 0.5, 1), "AM", "auto")]
+    _write(out, nodes, links, dem, dict(track="A4", type="sts", n=n, T=T,
+                                        congestion=congestion, seed=seed,
+                                        perturb=perturb))
+
+
 def main(argv=None):
     import argparse
     ap = argparse.ArgumentParser(prog="taplab forge")
-    ap.add_argument("kind", choices=["diamond", "braess", "grid"])
+    ap.add_argument("kind", choices=["diamond", "braess", "grid", "sts"])
+    ap.add_argument("--T", type=int, default=20)
     ap.add_argument("--out", default=None)
     ap.add_argument("--demand", type=float, default=4000.0)
     ap.add_argument("--with-diagonal", action="store_true", default=True)
@@ -226,10 +279,14 @@ def main(argv=None):
     out = Path(a.out) if a.out else root / "tapbench" / "forge" / (
         a.kind if a.kind != "grid" else
         f"grid{a.n}_{a.pattern}_s{a.seed}")
+    if a.kind == "sts" and a.out is None:
+        out = root / "tapbench" / "forge" / f"sts{a.n}x{a.T}_s{a.seed}"
     if a.kind == "diamond":
         forge_diamond(out, a.demand)
     elif a.kind == "braess":
         forge_braess(out, a.demand, a.with_diagonal)
+    elif a.kind == "sts":
+        forge_sts(out, a.n, a.T, a.congestion, a.seed, a.perturb)
     else:
         forge_grid(out, a.n, a.pattern, a.origins, a.dests_per_origin,
                    a.corridors, a.barrier, a.braess_diagonal, a.perturb,

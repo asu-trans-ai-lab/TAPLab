@@ -195,6 +195,14 @@ def main():
     p.add_argument("--gap-target", default=None)
     p.set_defaults(fn=cmd_verify)
 
+    p = sub.add_parser("ksp")
+    p.add_argument("instance")
+    p.add_argument("--k", type=int, default=8)
+    p.add_argument("--penalty", type=float, default=1.5)
+    p.set_defaults(fn=lambda a: __import__("taplab.ksp", fromlist=["write_pool"])
+                   .write_pool(Instance.load(_resolve(a.instance)),
+                               a.k, a.penalty))
+
     p = sub.add_parser("forge", add_help=False)
     p.set_defaults(fn=lambda a: __import__("taplab.forge", fromlist=["main"])
                    .main(a.forge_args))
