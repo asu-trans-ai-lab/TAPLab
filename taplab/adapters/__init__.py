@@ -22,6 +22,9 @@ def get(name: str):
     if name == "task":
         from . import task_adapter
         return task_adapter
+    if name == "column_cpp":
+        from . import column_cpp
+        return column_cpp
     raise KeyError(f"unknown adapter: {name}")
 
 
