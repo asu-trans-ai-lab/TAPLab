@@ -1,0 +1,15 @@
+name: origin_atom_grid24h
+generator: TAPForge
+track: A2/A3
+type: grid
+n: 24
+pattern: one2many
+origins: 0
+dests_per_origin: 24
+corridors: 2
+barrier: False
+braess_diagonal: False
+perturb: 0.02
+congestion: high
+seed: 5
+monotone: True

@@ -15,8 +15,10 @@ Gap target 1e-5. Seven algorithm arms: **tapb_B** (Dial's Algorithm B, C), **tas
 | task_LUCE | 0.08 | 8.17e-06 | — | 56,291 | True |
 | task_BFW | 0.07 | 9.66e-06 | — | 56,290 | True |
 | latent_ol1 | 0.023 | 9.63e-06 | — | 56,290 | True |
+| colcpp_full (K=32 pool) | 0.13 | 7.99e-05 | 9.13e-06 | 56,292 | conservation ok |
+| colcpp_latent (K=32 pool) | 0.076 | 7.82e-05 | 7.59e-06 | 56,292 | conservation ok |
 
-*C++ fixed-pool arms: pending (pool generation in progress at report time; rerun the generator to refresh).*
+Decomposition (Bertsekas-PG H0 / Jayakrishnan-GP R0 / latent R1): S_R = 0.287193, S_C|R = 3.28013, S_RC = 0.942033; atom objective error 3.89202e-06
 
 ## forge/ladder_grid10 — grid 10x10, route-rich
 
@@ -27,8 +29,10 @@ Gap target 1e-5. Seven algorithm arms: **tapb_B** (Dial's Algorithm B, C), **tas
 | task_LUCE | 0.84 | 9.46e-06 | — | 275,337 | True |
 | task_BFW | 0.2 | 8.45e-06 | — | 275,338 | True |
 | latent_ol1 | 0.179 | 9.60e-06 | — | 275,336 | True |
+| colcpp_full (K=32 pool) | 0.316 | 1.44e-03 | 9.51e-06 | 275,514 | conservation ok |
+| colcpp_latent (K=32 pool) | 0.292 | 1.44e-03 | 7.87e-06 | 275,512 | conservation ok |
 
-*C++ fixed-pool arms: pending (pool generation in progress at report time; rerun the generator to refresh).*
+Decomposition (Bertsekas-PG H0 / Jayakrishnan-GP R0 / latent R1): S_R = 1.53729, S_C|R = 3.78046, S_RC = 5.81167; atom objective error 2.30845e-06
 
 ## forge/ladder_grid20 — grid 20x20, route-rich
 
@@ -39,8 +43,10 @@ Gap target 1e-5. Seven algorithm arms: **tapb_B** (Dial's Algorithm B, C), **tas
 | task_LUCE | 100.14 | 9.98e-06 | — | 2,963,622 | True |
 | task_BFW | 2.21 | 9.78e-06 | — | 2,963,645 | True |
 | latent_ol1 | 2.65 | 9.82e-06 | — | 2,963,612 | True |
+| colcpp_full (K=32 pool) | 5.491 | 2.32e-03 | 9.96e-06 | 2,968,587 | conservation ok |
+| colcpp_latent (K=32 pool) | 4.244 | 2.31e-03 | 8.26e-06 | 2,968,568 | conservation ok |
 
-*C++ fixed-pool arms: pending (pool generation in progress at report time; rerun the generator to refresh).*
+Decomposition (Bertsekas-PG H0 / Jayakrishnan-GP R0 / latent R1): S_R = 3.1613, S_C|R = 1.37691, S_RC = 4.35283; atom objective error 2.33335e-06
 
 ## forge/ladder_grid40 — grid 40x40, route-rich (1,756 nodes)
 
@@ -51,8 +57,10 @@ Gap target 1e-5. Seven algorithm arms: **tapb_B** (Dial's Algorithm B, C), **tas
 | task_LUCE | 601.22 | 1.67e-04 | — | 45,910,448 | True |
 | task_BFW | 79.91 | 9.50e-06 | — | 45,908,838 | True |
 | latent_ol1 | 150.274 | 9.61e-06 | — | 45,908,763 | True |
+| colcpp_full (K=32 pool) | 83.012 | 5.51e-03 | 9.80e-06 | 46,050,481 | conservation ok |
+| colcpp_latent (K=32 pool) | 69.748 | 5.49e-03 | 9.74e-06 | 46,050,299 | conservation ok |
 
-*C++ fixed-pool arms: pending (pool generation in progress at report time; rerun the generator to refresh).*
+Decomposition (Bertsekas-PG H0 / Jayakrishnan-GP R0 / latent R1): S_R = 2.30989, S_C|R = 0.688743, S_RC = 1.59092; atom objective error 1.55384e-06
 
 ## forge/sts5x20_s1 — space-time 5x5 grid x 20 steps (A4)
 
@@ -63,8 +71,10 @@ Gap target 1e-5. Seven algorithm arms: **tapb_B** (Dial's Algorithm B, C), **tas
 | task_LUCE | 0.1 | -1.00e+00 | — | 0 | FAILED (no flows) |
 | task_BFW | 0.12 | -1.00e+00 | — | 0 | FAILED (no flows) |
 | latent_ol1 | 1.417 | 9.67e-06 | — | 53,473 | True |
+| colcpp_full (K=32 pool) | 0.289 | 3.54e-04 | 9.57e-06 | 53,485 | conservation ok |
+| colcpp_latent (K=32 pool) | 0.429 | 3.51e-04 | 9.94e-06 | 53,485 | conservation ok |
 
-*C++ fixed-pool arms: pending (pool generation in progress at report time; rerun the generator to refresh).*
+Decomposition (Bertsekas-PG H0 / Jayakrishnan-GP R0 / latent R1): S_R = 0.0285757, S_C|R = 0.0162323, S_RC = 0.000463849; atom objective error 1.32433e-09
 
 ## forge/sts8x30_s1 — space-time 8x8 grid x 30 steps (A4)
 
@@ -75,8 +85,10 @@ Gap target 1e-5. Seven algorithm arms: **tapb_B** (Dial's Algorithm B, C), **tas
 | task_LUCE | 0.27 | -1.00e+00 | — | 0 | FAILED (no flows) |
 | task_BFW | 0.21 | -1.00e+00 | — | 0 | FAILED (no flows) |
 | latent_ol1 | 5.556 | 9.89e-06 | — | 139,610 | True |
+| colcpp_full (K=32 pool) | 0.8 | 7.32e-04 | 9.91e-06 | 139,709 | conservation ok |
+| colcpp_latent (K=32 pool) | 0.866 | 7.32e-04 | 9.89e-06 | 139,709 | conservation ok |
 
-*C++ fixed-pool arms: pending (pool generation in progress at report time; rerun the generator to refresh).*
+Decomposition (Bertsekas-PG H0 / Jayakrishnan-GP R0 / latent R1): S_R = 0.00340787, S_C|R = 0.107192, S_RC = 0.000365296; atom objective error 4.38308e-09
 
 ## sioux_falls — Sioux Falls (path-poor classic)
 
@@ -87,8 +99,10 @@ Gap target 1e-5. Seven algorithm arms: **tapb_B** (Dial's Algorithm B, C), **tas
 | task_LUCE | 0.09 | 9.55e-06 | — | 7,478,768 | True |
 | task_BFW | 0.1 | 7.77e-06 | — | 7,477,106 | True |
 | latent_ol1 | 0.084 | 9.65e-06 | — | 7,478,913 | True |
+| colcpp_full (K=32 pool) | 0.561 | 3.61e-03 | 9.66e-06 | 7,577,627 | conservation ok |
+| colcpp_latent (K=32 pool) | 0.536 | 3.62e-03 | 9.05e-06 | 7,578,796 | conservation ok |
 
-*C++ fixed-pool arms: pending (pool generation in progress at report time; rerun the generator to refresh).*
+Decomposition (Bertsekas-PG H0 / Jayakrishnan-GP R0 / latent R1): S_R = 0.731685, S_C|R = 4.23854, S_RC = 3.10128; atom objective error 2.09686e-07
 
 ## chicago_sketch — Chicago Sketch (933 nodes, 2,950 links)
 
@@ -99,8 +113,8 @@ Gap target 1e-5. Seven algorithm arms: **tapb_B** (Dial's Algorithm B, C), **tas
 | task_LUCE | 4.84 | 7.82e-06 | — | 22,303,817 | True |
 | task_BFW | 6.2 | 9.91e-06 | — | 22,303,211 | True |
 | latent_ol1 | 14.623 | 7.63e-06 | — | 22,303,318 | True |
-
-*C++ fixed-pool arms: pending (pool generation in progress at report time; rerun the generator to refresh).*
+| colcpp_full (K=32 pool) |  |  |  |  | conservation  |
+| colcpp_latent (K=32 pool) |  |  |  |  | conservation  |
 
 ## Latent-atom k-sweep (adaptive, full-network certified)
 
@@ -162,36 +176,36 @@ python scripts/latent_atom_comparison.py   # k-sweep
 python scripts/build_top7_report.py        # this report
 ```
 
-## B5 scenario reuse: the lane where the frozen atom pays (new)
+## Origin-atom B0/L1/L2 experiment (spec confirmed and executed)
 
-Protocol: one full-pool base solve fixes the paper-faithful atom model
-(anchor + 6 majors + one FIXED nominal-share atom per OD, exactly the
-build_atom_model rule of stable_release/paper2_latent_atom); each perturbed
-scenario then re-solves warm in the compressed space vs a cold full-pool GP,
-both to represented-column gap 1e-6. Details: scenario_reuse.md. Log-scale performance charts: chart_reuse_sioux_log.svg, chart_reuse_grid20_log.svg (cumulative and per-scenario times with the break-even markers).
+Single-origin monotone DAG grids, full-space certified gaps
+(origin_atom_results.csv, chart_gap_vs_sweeps.svg):
 
-- **forge/ladder_grid20 (route-rich)**: compressed re-solves 2.0-3.8x faster,
-  objective error 1e-8..9e-6, and the speedup GROWS with perturbation
-  (demand x1.3: 3.83x). **Break-even including all setup: scenario 4.**
-- **sioux_falls (path-poor)**: 0.9-3.2x, break-even at scenario 7; the frozen
-  atom's objective error grows with drift (1.4e-4 at demand x1.3) — the
-  refresh threshold is measurable and sits near +/-20-30% demand drift.
-- Capacity-side scenarios benefit most (x2.4-3.5 on both instances): capacity
-  shocks reshuffle minor-path shares, exactly what the atom absorbs.
+| arm | grid16 medium | grid24 high congestion |
+|---|---|---|
+| B0 full bush worker | 9.6e-6 in **7 sweeps** | 9.5e-6 in **9 sweeps** |
+| L1 fixed atoms J=2..16 | plateaus 4.7e-4 -> 1.6e-4 (hull limit) | J8: 6.3e-3 |
+| L2 adaptive atoms | **6.7e-6, 2 atoms**, 16 sweeps | **7.9e-6, 2 atoms**, 24 sweeps, obj within 1.05e-6 of B0 |
 
-This confirms the design argument for the Algorithm-B combination: the atom's
-payoff is in scenario reuse and dormant-alternative storage, not in one-shot
-solving. Next steps: O0+atom in the origin_bush harness (virtual column in
-the bush Newton swap) and orientation=destination for LUCE-style bushes.
+Honest findings against the spec's research question ("can L2 reach B0-level
+solutions with significantly fewer full bush sweeps?"):
 
-
-## Origin-flow atom (definition locked; code paused pending confirmation)
-
-ORIGIN_ATOM_SPEC.md formalizes the origin atom as a COMPLETE feasible
-origin-flow template H_o^j in F_o = {x >= 0 : N x = b_o} — one template
-serves ALL destinations of origin o, and x^o = sum_j lambda_oj H_o^j stays
-feasible for any convex weights. This is a different object from the
-path-group OL1 tested so far; the spec includes the B0 / L1 / L2 experiment
-design (the honest question: can adaptive origin atoms reach B0-level
-solutions with significantly fewer full bush sweeps?) and five open design
-choices awaiting confirmation before any experiment code is written.
+1. **L1 confirms the theory exactly**: fixed primed atoms cannot reach 1e-5 —
+   the convex hull of J templates does not contain equilibrium; the gap
+   improves monotonically with J but priming costs grow linearly (J16 spends
+   96 sweeps to reach only 1.6e-4).
+2. **L2 reaches B0-quality** (same objective to 7 digits, certified gap under
+   tolerance, flow error 0.05) **with only 2 retained atoms** — the
+   compression is faithful and the stall-triggered oracle + pruning works as
+   designed.
+3. **But not with fewer sweeps here**: on single-origin DAGs the bush worker
+   itself converges in 7-9 sweeps, so there is no sweep budget for a latent
+   layer to save. This reproduces the origin_bush boundary finding at
+   full fidelity.
+4. **Where the accounting flips**: when bush sweeps are expensive (general
+   cyclic networks, where real Algorithm B pays for bush reconstruction and
+   cycle checks) or when atoms amortize across scenarios — the B5
+   scenario-reuse result (break-even at scenario 4, speedup growing with
+   perturbation) is the path-level demonstration of the same economics.
+   The next experiment in sequence: L2 with scenario-reused atoms, and a
+   cyclic-network B0 where sweeps genuinely cost something.

@@ -92,7 +92,7 @@ def forge_braess(out: Path, demand=4000.0, with_diagonal=True):
 def forge_grid(out: Path, n=10, pattern="corner", origins=0,
                dests_per_origin=0, corridors=0, barrier=False,
                braess_diagonal=False, perturb=0.0, congestion="medium",
-               seed=1):
+               seed=1, monotone=False):
     """A2/A3 Manhattan grid: n x n intersections, bidirectional streets as
     two directed arcs, zone centroids on the boundary. A compact physical
     network with a combinatorially large path space."""
@@ -142,13 +142,15 @@ def forge_grid(out: Path, n=10, pattern="corner", origins=0,
             if j + 1 < n:
                 if not (barrier and j + 1 == mid_col and i != gap_row):
                     add(nid(i, j), nid(i, j + 1), "arterial", cap_h, f)
-                if not (barrier and j + 1 == mid_col and i != gap_row):
+                if not monotone and \
+                        not (barrier and j + 1 == mid_col and i != gap_row):
                     add(nid(i, j + 1), nid(i, j), "arterial", cap_h, f)
             if i + 1 < n:
                 f2 = base_fftt * (1 + perturb * (rng.random() - 0.5) * 2) \
                     if perturb else base_fftt
                 add(nid(i, j), nid(i + 1, j), "arterial", base_cap, f2)
-                add(nid(i + 1, j), nid(i, j), "arterial", base_cap, f2)
+                if not monotone:
+                    add(nid(i + 1, j), nid(i, j), "arterial", base_cap, f2)
     if braess_diagonal:
         c = n // 2
         add(nid(c - 1, c - 1), nid(c, c), "arterial", 3 * base_cap,
@@ -197,7 +199,7 @@ def forge_grid(out: Path, n=10, pattern="corner", origins=0,
         track="A2/A3", type="grid", n=n, pattern=pattern, origins=origins,
         dests_per_origin=dests_per_origin, corridors=corridors,
         barrier=barrier, braess_diagonal=braess_diagonal, perturb=perturb,
-        congestion=congestion, seed=seed))
+        congestion=congestion, seed=seed, monotone=monotone))
 
 
 def forge_sts(out: Path, n=5, T=20, congestion="medium", seed=1,
@@ -274,6 +276,7 @@ def main(argv=None):
     ap.add_argument("--congestion", default="medium",
                     choices=["low", "medium", "high"])
     ap.add_argument("--seed", type=int, default=1)
+    ap.add_argument("--monotone", action="store_true")
     a = ap.parse_args(argv)
     root = Path(__file__).resolve().parent.parent
     out = Path(a.out) if a.out else root / "tapbench" / "forge" / (
@@ -290,7 +293,7 @@ def main(argv=None):
     else:
         forge_grid(out, a.n, a.pattern, a.origins, a.dests_per_origin,
                    a.corridors, a.barrier, a.braess_diagonal, a.perturb,
-                   a.congestion, a.seed)
+                   a.congestion, a.seed, a.monotone)
 
 
 if __name__ == "__main__":
