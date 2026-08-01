@@ -1,0 +1,7 @@
+name: chicago_regional
+title: Chicago Regional (large-scale performance and path-coverage instance)
+source: CMAP Chicago Regional via TNTP lineage; GMNS conversion from the CompressedTAP experiments
+centroid_convention: node_type=centroid; node_id = zone_id; connectors typed from centroid incidence
+demand_storage: demand.csv.gz (the loader reads .csv or .csv.gz transparently)
+reference: reference/link_performance.csv = ref_volume/ref_cost columns of the source GMNS conversion
+license: research use per TransportationNetworks repository

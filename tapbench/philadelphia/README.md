@@ -1,10 +1,6 @@
-# Philadelphia (import required)
+# Philadelphia
 
-The Philadelphia instance (approximately 40,000 links) is not bundled. Import
-it from the TNTP repository (github.com/bstabler/TransportationNetworks,
-Philadelphia_net.tntp and Philadelphia_trips.tntp) with:
-
-    python -m taplab.converters.gmns_tntp tntp2gmns Philadelphia_net.tntp Philadelphia_trips.tntp tapbench/philadelphia
-
-Philadelphia serves large-scale scalability and transferability testing
-(benchmark track B4). All statistics are computed by `taplab stats`.
+Large-scale scalability and transferability instance (benchmark track B4) in
+TAPLab's compact GMNS-compatible representation. Demand is bundled as
+`demand.csv.gz`; the instance loader reads `.csv` or `.csv.gz` transparently.
+Statistics are computed by `taplab stats`, never hard-coded.

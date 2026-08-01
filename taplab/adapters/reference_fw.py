@@ -24,7 +24,8 @@ def solve(instance, algorithm="fw", gap=1e-6, max_time=300, max_iter=2000):
         fftt = float(r.get("vdf_fftt") or 0) or float(r["length"]) / fs * 60.0
         B = float(r.get("vdf_alpha") or 0.15)
         P = float(r.get("vdf_beta") or 4.0)
-        links.append(dict(a=a, b=b, cap=cap, fftt=fftt, B=B, P=P))
+        links.append(dict(a=a, b=b, cap=cap, fftt=fftt, B=B, P=P,
+                          lid=r.get("link_id", "")))
     m = len(links)
     fwd = defaultdict(list)
     for i, l in enumerate(links):
@@ -41,6 +42,13 @@ def solve(instance, algorithm="fw", gap=1e-6, max_time=300, max_iter=2000):
         return [l["fftt"] * (1.0 + l["B"] * (x[i] / l["cap"]) ** l["P"])
                 for i, l in enumerate(links)]
 
+    # dedicated centroids carry no through traffic: expansion out of a
+    # centroid node is only allowed at the path origin. Coincident-centroid
+    # instances (every node is a centroid, e.g. Sioux Falls) are exempt.
+    cent_nodes = set(cents.values())
+    block_thru = len(cent_nodes) < len({n for n in fwd} |
+                                       {l["b"] for l in links})
+
     def aon(t):
         """All-or-nothing loading on current times."""
         y = [0.0] * m
@@ -51,6 +59,8 @@ def solve(instance, algorithm="fw", gap=1e-6, max_time=300, max_iter=2000):
             while pq:
                 du, u = heapq.heappop(pq)
                 if du > dist.get(u, 1e18):
+                    continue
+                if block_thru and u != o and u in cent_nodes:
                     continue
                 for v, li in fwd[u]:
                     nd = du + t[li]
@@ -102,7 +112,7 @@ def solve(instance, algorithm="fw", gap=1e-6, max_time=300, max_iter=2000):
         x = [x[i] + lam * (y[i] - x[i]) for i in range(m)]
 
     t = times(x)
-    flows = [dict(from_node_id=l["a"], to_node_id=l["b"],
+    flows = [dict(link_id=l["lid"], from_node_id=l["a"], to_node_id=l["b"],
                   volume=round(x[i], 4), travel_time=round(t[i], 6))
              for i, l in enumerate(links)]
     return dict(flows=flows, convergence=history,

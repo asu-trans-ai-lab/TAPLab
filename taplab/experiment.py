@@ -50,9 +50,10 @@ def run_experiment(inst_dir, solver, demand_scales, capacity_scales,
             tag = f"d{ds}_c{cs}".replace(".", "p")
             with open(outdir / f"link_performance_{tag}.csv", "w",
                       newline="") as f:
-                w = csv.DictWriter(f, fieldnames=["from_node_id",
+                w = csv.DictWriter(f, fieldnames=["link_id", "from_node_id",
                                                   "to_node_id", "volume",
-                                                  "travel_time"])
+                                                  "travel_time"],
+                                   extrasaction="ignore")
                 w.writeheader()
                 w.writerows(out["flows"])
     with open(outdir / "experiment_grid.csv", "w", newline="") as f:

@@ -7,8 +7,21 @@ dependency required for the core).
 from __future__ import annotations
 
 import csv
+import gzip
 from dataclasses import dataclass, field
 from pathlib import Path
+
+
+def open_table(folder: Path, name: str):
+    """Open <name>.csv, or transparently <name>.csv.gz when only the
+    compressed form is bundled (large instances)."""
+    plain = folder / f"{name}.csv"
+    if plain.exists():
+        return open(plain, encoding="utf-8-sig")
+    gz = folder / f"{name}.csv.gz"
+    if gz.exists():
+        return gzip.open(gz, "rt", encoding="utf-8-sig")
+    raise FileNotFoundError(plain)
 
 
 def read_kv_yaml(path: Path) -> dict:
@@ -21,6 +34,23 @@ def read_kv_yaml(path: Path) -> dict:
         if ":" in line and not line.startswith(" "):
             k, v = line.split(":", 1)
             out[k.strip()] = v.strip().strip("'\"")
+    return out
+
+
+def _canonical_arcs(rows):
+    """Canonicalize GMNS directionality: every solver must receive the same
+    directed graph. A row with directed=0 (bidirectional) expands into two
+    directed arcs; the reverse arc gets link_id suffixed with 'r'."""
+    out = []
+    for r in rows:
+        out.append(r)
+        if str(r.get("directed", "1")).strip() in ("0", "false", "False"):
+            rev = dict(r)
+            rev["from_node_id"], rev["to_node_id"] = r["to_node_id"], r["from_node_id"]
+            rev["link_id"] = f"{r.get('link_id', '')}r"
+            rev["directed"] = "1"
+            r["directed"] = "1"
+            out.append(rev)
     return out
 
 
@@ -37,9 +67,9 @@ class Instance:
     def load(cls, path) -> "Instance":
         p = Path(path)
         inst = cls(path=p)
-        inst.nodes = list(csv.DictReader(open(p / "node.csv", encoding="utf-8-sig")))
-        inst.links = list(csv.DictReader(open(p / "link.csv", encoding="utf-8-sig")))
-        inst.demand = list(csv.DictReader(open(p / "demand.csv", encoding="utf-8-sig")))
+        inst.nodes = list(csv.DictReader(open_table(p, "node")))
+        inst.links = _canonical_arcs(list(csv.DictReader(open_table(p, "link"))))
+        inst.demand = list(csv.DictReader(open_table(p, "demand")))
         inst.manifest = read_kv_yaml(p / "manifest.yml")
         inst.settings = read_kv_yaml(p / "settings.yml")
         return inst

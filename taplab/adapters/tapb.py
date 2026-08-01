@@ -30,9 +30,14 @@ def _to_tntp(instance, work, name):
                      f"\t{fftt:.6f}\t{B:.4f}\t{P:.2f}\t{fs:.2f}\t0\t1\t;")
     netdir = work / "net"
     netdir.mkdir(exist_ok=True)
+    # dedicated centroids must not carry through traffic: when the network
+    # has non-centroid nodes, paths may only pass through nodes > n_zones
+    # (zones are renumbered first). Coincident-centroid instances such as
+    # Sioux Falls keep first-thru = 1.
+    first_thru = len(zone_nodes) + 1 if others else 1
     (netdir / f"{name}_net.txt").write_text(
         f"<NUMBER OF ZONES> {len(zone_nodes)}\n"
-        f"<NUMBER OF NODES> {len(renum)}\n<FIRST THRU NODE> 1\n"
+        f"<NUMBER OF NODES> {len(renum)}\n<FIRST THRU NODE> {first_thru}\n"
         f"<NUMBER OF LINKS> {len(lines)}\n<END OF METADATA>\n\n"
         + "\n".join(lines) + "\n")
     zid_of = {z: i + 1 for i, z in enumerate(sorted(cents))}
@@ -77,7 +82,8 @@ def solve(instance, algorithm="B", gap=1e-6, max_time=600):
         fftt = float(lk.get("vdf_fftt") or 0) or float(lk["length"]) / fs * 60.0
         bpr[(a, b)] = (fftt, float(lk["capacity"]),
                        float(lk.get("vdf_alpha") or 0.15),
-                       float(lk.get("vdf_beta") or 4.0))
+                       float(lk.get("vdf_beta") or 4.0),
+                       lk.get("link_id", ""))
     flows = []
     fp = work / f"{name}_flows.txt"
     if fp.exists():
@@ -89,10 +95,10 @@ def solve(instance, algorithm="B", gap=1e-6, max_time=600):
                 continue
             a, b = inv[int(m.group(1))], inv[int(m.group(2))]
             v = float(m.group(3))
-            fftt, cap, al, be = bpr.get((a, b), (0.0, 1.0, 0.15, 4.0))
+            fftt, cap, al, be, lid = bpr.get((a, b), (0.0, 1.0, 0.15, 4.0, ""))
             tt = fftt * (1.0 + al * (v / cap) ** be) if cap > 0 else fftt
-            flows.append(dict(from_node_id=a, to_node_id=b, volume=v,
-                              travel_time=round(tt, 6)))
+            flows.append(dict(link_id=lid, from_node_id=a, to_node_id=b,
+                              volume=v, travel_time=round(tt, 6)))
     gaps = re.findall(r"Iteration\s+(\d+):\s+gap\s+([\d.eE+-]+)",
                       r.stdout or "")
     if not gaps:  # some builds print "gap X" lines without iteration numbers

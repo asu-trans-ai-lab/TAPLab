@@ -42,10 +42,10 @@ TAPLab uses compact GMNS-compatible tables as its portable exchange layer while 
 | --- | --- | --- | --- |
 | Two-route diagnostic | Diagnostic | Unit testing with an analytical equilibrium | Bundled |
 | Sioux Falls | Small | Unit testing, debugging, reference verification | Bundled with best-known flows |
-| Anaheim | Small–medium | Classical equilibrium and algorithm testing | Import via converter |
+| Anaheim | Small–medium | Classical equilibrium and algorithm testing | Bundled with best-known flows |
 | Chicago Sketch | Intermediate | Cross-solver verification | Bundled with best-known flows |
-| Chicago Regional | Large | Performance and path-coverage analysis | Import via converter |
-| Philadelphia | Large | Scalability and transferability testing | Import via converter |
+| Chicago Regional | Large | Performance and path-coverage analysis | Bundled (gzipped demand) with reference volumes |
+| Philadelphia | Large | Scalability and transferability testing | Bundled (gzipped demand) |
 | ARC Atlanta super-600 | Regional, simple mode | Physics-informed validation against agency reference volumes | Import via `import_arc_super600` (licensed data, never bundled) |
 
 Exact network statistics are never hard-coded in documentation. TAPValidate computes and publishes them directly from each imported instance:
@@ -104,17 +104,17 @@ TAPLab uses a registry-based design (`schemas/solver_registry.json`). Solver sou
 | Link-based | Frank–Wolfe (pure Python) | built-in `reference_fw` | Verified (reproducibility anchor) |
 | Bush-based | Dial's Algorithm B | `tap-b` | End-to-end verified |
 | Link-based | MSA, FW, CFW, BFW | `tap-b` | Adapter pathway available |
-| Link-based | Frank–Wolfe | TAPLite | GMNS-native pathway available |
-| Link-based | MSA, FW, CFW, BFW | AequilibraE | Available (`pip install taplab[full]`) |
-| Bush/origin-based | TAPAS | TAsK | Adapter templated |
-| Origin-based | LUCE | TAsK | Adapter templated |
-| Path-based | Gradient Projection | TAsK | Adapter templated |
-| Bush-based | Algorithm B, BFW | TAsK | Adapter templated |
-| Bush-based | iTAPAS | Open-TNM | Registered for integration |
-| Other advanced methods | ALM-Greedy, C-BiTA, Greedy | Open-TNM | Registered for integration |
-| Origin-bush | O0 fixed-bush Newton | `origin_bush_latent_cpp` | Registered for integration |
-| Path-based | P0 explicit-path GP | `origin_bush_latent_cpp` | Registered for integration |
-| Compressed origin-bush | OL1 latent-atom method | `origin_bush_latent_cpp` | Registered for research testing |
+| Link-based | Frank–Wolfe | TAPLite | Registered (adapter present, not yet verified) |
+| Link-based | MSA, FW, CFW, BFW | AequilibraE | Registered (`pip install taplab[full]`, not yet verified) |
+| Bush/origin-based | TAPAS | TAsK | Planned (trips parser fix pending) |
+| Origin-based | LUCE | TAsK | Planned (trips parser fix pending) |
+| Path-based | Gradient Projection | TAsK | Planned (trips parser fix pending) |
+| Bush-based | Algorithm B, BFW | TAsK | Planned (trips parser fix pending) |
+| Bush-based | iTAPAS | Open-TNM | Planned |
+| Other advanced methods | ALM-Greedy, C-BiTA, Greedy | Open-TNM | Planned |
+| Origin-bush | O0 fixed-bush Newton | `origin_bush_latent_cpp` | Planned |
+| Path-based | P0 explicit-path GP | `origin_bush_latent_cpp` | Planned |
+| Compressed origin-bush | OL1 latent-atom method | `origin_bush_latent_cpp` | Planned (research testing) |
 
 The initial verified computational pathway is:
 
@@ -127,7 +127,7 @@ GMNS
   → user-equilibrium verification
 ```
 
-On Chicago Sketch, this pathway preserves all 2,950 links and the total OD demand through the GMNS–TNTP round trip, and the returned Algorithm B flow solution matches the published best-known flows to within approximately 0.07% under the selected convergence tolerance. The TAsK adapters require one remaining parser correction so that generated TNTP trip tables exactly match TAsK's expected spacing and formatting.
+On Chicago Sketch, this pathway preserves all 2,950 links and the total OD demand through the GMNS–TNTP round trip. The returned Algorithm B solution is certified by the independent validator at a recomputed relative gap of 2.9e-7, its total system travel time agrees with the independent Frank–Wolfe reference within 0.005%, and its link flows sit within 0.97% RMSE (of mean link flow) of the published best-known solution. On Anaheim the same pathway certifies at a recomputed gap of 5.1e-7 with 0.31% flow RMSE against the best-known solution, and on Chicago Regional at 5.6e-5 in 270 seconds. The TAsK adapters require one remaining parser correction so that generated TNTP trip tables exactly match TAsK's expected spacing and formatting.
 
 ---
 
@@ -161,6 +161,10 @@ taplab dashboard chicago_sketch
 # Interactive network + assignment viewer (static HTML; no server required)
 taplab view chicago_sketch
 
+# Independently certify a solver run: recomputed costs, Beckmann objective,
+# conservation, shortest-path lower bound, relative gap
+taplab verify chicago_sketch --solver tapb --gap-target 1e-4
+
 # Independently re-verify an instance's reference outputs
 taplab reproduce tapbench/sioux_falls
 ```
@@ -176,6 +180,7 @@ summary.json           # solver, algorithm, iterations, gap, runtime, TSTT
 convergence.csv        # iteration, relative_gap, wall_time_s
 link_performance.csv   # normalized onto GMNS link identifiers
 report.md              # TAPReports run report incl. reference comparison
+validation_report.json # independent certification from `taplab verify`
 ```
 
 plus `network_statistics.json` (from `taplab stats`) and `dashboard.html`
@@ -215,4 +220,6 @@ TAPLab is not another traffic-assignment algorithm and is not simply a GMNS conv
 
 Its innovation is the integration of portable problem definitions; tiered small-to-regional benchmark networks; link-, path-, origin-, and bush-based algorithms; standardized solver adapters; mathematical and data validators; network and result visualization; convergence and scalability dashboards; and independently reproducible computational records.
 
-GMNS provides the exchange representation, while TAPLab provides the scientific experimentation, verification, and comparison environment.
+GMNS provides the exchange representation, while TAPLab provides the scientific experimentation, verification, and comparison environment. Every published accuracy figure is certified by the independent validator (`taplab verify`), which recomputes link costs, the Beckmann objective, flow conservation, the shortest-path lower bound, and the relative gap without trusting the solver.
+
+See [ROADMAP.md](ROADMAP.md) for the sequenced plan (time-to-verified-accuracy benchmarking, adaptive KSP-GP, the C++ `libtapcore` kernel, and staged extensions beyond TAP) and [tapbench/DATA_LICENSES.md](tapbench/DATA_LICENSES.md) for per-dataset provenance, citations, and checksums.

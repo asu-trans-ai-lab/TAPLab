@@ -1,0 +1,7 @@
+name: philadelphia
+title: Philadelphia (large-scale scalability instance)
+source: TNTP TransportationNetworks (bstabler) Philadelphia net/trips, imported via taplab.converters
+centroid_convention: node_type=centroid; node_id = zone_id; connectors typed from centroid incidence
+demand_storage: demand.csv.gz (the loader reads .csv or .csv.gz transparently)
+reference: none bundled; benchmark track B4 measures scalability, not flow reproduction
+license: research use per TransportationNetworks repository

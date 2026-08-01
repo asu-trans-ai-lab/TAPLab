@@ -81,13 +81,16 @@ def validate(instance: Instance) -> dict:
         except ValueError:
             errors.append(f"V6 non-numeric attributes on link {r.get('link_id')}")
             continue
-        if cap <= 0 or ln <= 0 or fs <= 0:
-            # zero-length or uncapacitated centroid connectors are a normal
-            # modeling convention (loaded at free-flow); flag but do not fail
-            if (r.get("link_type") or "").strip() == "centroid_connector":
-                warnings.append(f"V6 zero-length/uncapacitated connector {r.get('link_id')}")
-            else:
-                errors.append(f"V6 nonpositive cap/length/speed on link {r.get('link_id')}")
+        fftt = float(r.get("vdf_fftt") or 0)
+        is_conn = (r.get("link_type") or "").strip() == "centroid_connector"
+        if cap <= 0 and not is_conn:
+            # BPR is undefined at zero capacity on a loadable physical link
+            errors.append(f"V6 nonpositive capacity on link {r.get('link_id')}")
+        elif fftt <= 0 and (ln <= 0 or fs <= 0):
+            # zero travel-time basis: legitimate for connectors and dummy
+            # links (loaded at zero cost) but worth surfacing
+            warnings.append(f"V6 zero travel-time basis on link {r.get('link_id')}"
+                            + (" (connector)" if is_conn else ""))
 
     # V7 demand
     neg = [r for r in instance.demand if float(r["volume"]) < 0]

@@ -6,4 +6,5 @@ computed by `taplab stats`, not hard-coded here). Links touching exactly one
 centroid are typed `centroid_connector`. `reference/link_performance.csv`
 carries the TNTP best-known UE volumes. This is the primary cross-solver
 verification instance: the GMNS -> TNTP -> tap-b Algorithm B -> GMNS pathway
-reproduces the best-known flows to within ~0.07%.
+is certified by `taplab verify` at a recomputed gap of 2.9e-7, with link
+flows within about 1% RMSE of the bundled best-known solution.

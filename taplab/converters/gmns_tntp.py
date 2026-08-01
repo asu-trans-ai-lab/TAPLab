@@ -51,9 +51,13 @@ def gmns2tntp(gmns_dir, out_dir, name, cap_per_lane=False):
             zone_of[zid(n)] = i
     n_zones = len(zones)
 
+    # dedicated centroids (networks with non-zone nodes) must not carry
+    # through traffic: zones are renumbered 1..Z, so first-thru = Z+1.
+    # Coincident-centroid networks (every node a zone) keep first-thru = 1.
+    first_thru = n_zones + 1 if others else 1
     with open(out_dir / f"{name}_net.txt", "w", newline="") as f:
         f.write(f"<NUMBER OF ZONES> {n_zones}\n<NUMBER OF NODES> {len(nodes)}\n")
-        f.write(f"<FIRST THRU NODE> {1}\n<NUMBER OF LINKS> {len(links)}\n")
+        f.write(f"<FIRST THRU NODE> {first_thru}\n<NUMBER OF LINKS> {len(links)}\n")
         f.write("<END OF METADATA>\n\n~\ttail\thead\tcapacity\tlength\tfftt\tB\tPower\tspeed\ttoll\ttype\t\n")
         for r in links:
             a = renum[str(int(float(r["from_node_id"])))]
@@ -62,7 +66,9 @@ def gmns2tntp(gmns_dir, out_dir, name, cap_per_lane=False):
             cap = float(r["capacity"]) * (lanes if cap_per_lane else 1.0)
             length = float(r["length"])
             fs = float(r.get("free_speed") or 30) or 30
-            fftt = length / fs * 60.0
+            # authoritative free-flow time when provided; TNTP documentation
+            # warns speed and free-flow time are not necessarily consistent
+            fftt = float(r.get("vdf_fftt") or 0) or length / fs * 60.0
             B = float(r.get("vdf_alpha") or 0.15)
             P = float(r.get("vdf_beta") or 4.0)
             f.write(f"\t{a}\t{b}\t{cap:.4f}\t{length:.6f}\t{fftt:.6f}"
@@ -115,7 +121,7 @@ def tntp2gmns(net_txt, trips_txt, out_dir):
                 fs = length / (fftt / 60.0)
             else:
                 fs = speed or 30.0
-            links.append((a, b, cap, length, fs, B, P))
+            links.append((a, b, cap, length, fs, B, P, fftt))
     node_ids = sorted({a for a, *_ in links} | {l[1] for l in links})
     with open(out_dir / "node.csv", "w", newline="") as f:
         w = csv.writer(f)
@@ -125,10 +131,13 @@ def tntp2gmns(net_txt, trips_txt, out_dir):
     with open(out_dir / "link.csv", "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["link_id", "from_node_id", "to_node_id", "length",
-                    "lanes", "capacity", "free_speed", "vdf_alpha", "vdf_beta"])
-        for i, (a, b, cap, length, fs, B, P) in enumerate(links, 1):
+                    "lanes", "capacity", "free_speed", "vdf_fftt",
+                    "vdf_alpha", "vdf_beta"])
+        # vdf_fftt carries the authoritative TNTP free-flow time; consumers
+        # must prefer it over length/speed reconstruction
+        for i, (a, b, cap, length, fs, B, P, fftt) in enumerate(links, 1):
             w.writerow([i, a, b, f"{length:.6f}", 1, f"{cap:.4f}",
-                        f"{fs:.4f}", B, P])
+                        f"{fs:.4f}", f"{fftt:.6f}", B, P])
     dem = []
     if trips_txt and Path(trips_txt).exists():
         cur_o = None

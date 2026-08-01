@@ -51,6 +51,19 @@ def cmd_dashboard(a):
     print(f"-> {out}")
 
 
+def cmd_verify(a):
+    from .verify import verify
+    inst_dir = _resolve(a.instance)
+    inst = Instance.load(inst_dir)
+    lp = ROOT / "results" / inst_dir.name / a.solver / "link_performance.csv"
+    if not lp.exists():
+        sys.exit(f"no run found: {lp}")
+    rep = verify(inst, lp, gap_target=float(a.gap_target) if a.gap_target else None)
+    (lp.parent / "validation_report.json").write_text(json.dumps(rep, indent=1))
+    print(json.dumps(rep, indent=1))
+    sys.exit(0 if rep["certified"] else 1)
+
+
 def cmd_view(a):
     from .view import build_view
     inst_dir = _resolve(a.instance)
@@ -69,8 +82,16 @@ def cmd_bench(a):
                                 max_time=a.max_time)
         try:
             cmd_run(a2)
-        except Exception as e:  # keep the battery going past one failure
+        except SystemExit:
+            raise
+        except Exception as e:
+            # failures stay in the result table: record, then keep going
             print(f"[bench] {sname} failed: {e}", file=sys.stderr)
+            fdir = ROOT / "results" / _resolve(a.instance).name / sname.strip()
+            fdir.mkdir(parents=True, exist_ok=True)
+            (fdir / "summary.json").write_text(json.dumps(
+                dict(solver=sname.strip(), status="failed",
+                     error=str(e)[:500]), indent=1))
     cmd_dashboard(a)
 
 
@@ -93,8 +114,9 @@ def cmd_run(a):
     outdir = ROOT / "results" / inst_dir.name / a.solver
     outdir.mkdir(parents=True, exist_ok=True)
     with open(outdir / "link_performance.csv", "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=["from_node_id", "to_node_id",
-                                          "volume", "travel_time"])
+        w = csv.DictWriter(f, fieldnames=["link_id", "from_node_id",
+                                          "to_node_id", "volume",
+                                          "travel_time"], extrasaction="ignore")
         w.writeheader()
         w.writerows(out["flows"])
     with open(outdir / "convergence.csv", "w", newline="") as f:
@@ -160,6 +182,12 @@ def main():
     p = sub.add_parser("view")
     p.add_argument("instance")
     p.set_defaults(fn=cmd_view)
+
+    p = sub.add_parser("verify")
+    p.add_argument("instance")
+    p.add_argument("--solver", required=True)
+    p.add_argument("--gap-target", default=None)
+    p.set_defaults(fn=cmd_verify)
 
     p = sub.add_parser("bench")
     p.add_argument("instance")

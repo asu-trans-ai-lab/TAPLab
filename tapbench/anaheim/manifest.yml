@@ -1,0 +1,6 @@
+name: anaheim
+title: Anaheim (classical academic instance)
+source: TNTP TransportationNetworks (bstabler), imported 2026-07-31 via taplab.converters
+centroid_convention: node_type=centroid; node_id = zone_id; connectors typed from centroid incidence
+reference: reference/link_performance.csv = TNTP best-known UE volumes (Anaheim_flow.tntp)
+license: research use per TransportationNetworks repository

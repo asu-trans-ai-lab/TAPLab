@@ -119,6 +119,10 @@ def build_dashboard(instance, res_dir: Path, out: Path):
         rows = []
         for name, r in runs.items():
             s = r["summary"]
+            if s.get("status") == "failed":
+                rows.append(f"<tr><td>{name}</td><td colspan=6 style='color:#c0392b;text-align:left'>"
+                            f"FAILED: {s.get('error','')}</td></tr>")
+                continue
             rmse = ""
             if ref and r["flows"]:
                 common = set(ref) & set(r["flows"])
