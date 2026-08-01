@@ -30,7 +30,7 @@ TAPLab uses compact GMNS-compatible tables as its portable exchange layer while 
 | **TAPBench** | `tapbench/` | Tiered benchmark instances, reference solutions, experiment configurations, and evaluation protocols. |
 | **TAPRunner** | `taplab/adapters/`, `taplab run` / `taplab bench` | A common execution interface for Frank–Wolfe, Algorithm B, origin-based, bush-based, path-based, and other solvers. |
 | **TAPValidate** | `taplab/validate.py`, `taplab/stats.py` | Validator for network integrity, OD demand, assignment feasibility, and cross-solver consistency; publishes computed network statistics. |
-| **TAPView** | roadmap (`gui4gmns` integration) | Lightweight visualization of networks, zones, connectors, demand, link performance, and solver differences. |
+| **TAPView** | `taplab/view.py`, `taplab view` | Interactive TAP-specific network viewer: centroid / connector / physical layers, v/c and volume rendering, solver-difference overlays, per-link inspection across solvers. |
 | **TAPDashboard** | `taplab/dashboard.py`, `taplab dashboard` | Static HTML dashboard comparing algorithms, convergence histories, computational performance, and reproducibility status. |
 | **TAPReports** | `taplab/reports.py` | Normalized run / comparison / experiment reports and the independent reproduce check. |
 
@@ -158,6 +158,9 @@ taplab experiment sioux_falls --demand-scale 0.8,1.0,1.2
 # Open the dashboard (static HTML; no server required)
 taplab dashboard chicago_sketch
 
+# Interactive network + assignment viewer (static HTML; no server required)
+taplab view chicago_sketch
+
 # Independently re-verify an instance's reference outputs
 taplab reproduce tapbench/sioux_falls
 ```
@@ -195,6 +198,7 @@ TAPLab/
 │   ├── experiment.py       # perturbation grids
 │   ├── reports.py          # TAPReports
 │   ├── dashboard.py        # TAPDashboard (static HTML)
+│   ├── view.py             # TAPView interactive network viewer
 │   ├── adapters/           # TAPRunner solver adapters
 │   └── converters/         # GMNS <-> TNTP, ARC importer
 ├── schemas/solver_registry.json

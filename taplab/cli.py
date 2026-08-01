@@ -7,6 +7,7 @@
   taplab compare <name|dir> --solvers reference_fw,taplite
   taplab experiment <name|dir> --demand-scale 0.8,1.0,1.2 --capacity-scale 0.8,1.0
   taplab dashboard <name|dir>
+  taplab view <name|dir>
   taplab reproduce <instance_dir>
 """
 from __future__ import annotations
@@ -47,6 +48,16 @@ def cmd_dashboard(a):
     inst = Instance.load(inst_dir)
     res = ROOT / "results" / inst_dir.name
     out = build_dashboard(inst, res, res / "dashboard.html")
+    print(f"-> {out}")
+
+
+def cmd_view(a):
+    from .view import build_view
+    inst_dir = _resolve(a.instance)
+    inst = Instance.load(inst_dir)
+    res = ROOT / "results" / inst_dir.name
+    res.mkdir(parents=True, exist_ok=True)
+    out = build_view(inst, res, res / "view.html")
     print(f"-> {out}")
 
 
@@ -145,6 +156,10 @@ def main():
     p = sub.add_parser("dashboard")
     p.add_argument("instance")
     p.set_defaults(fn=cmd_dashboard)
+
+    p = sub.add_parser("view")
+    p.add_argument("instance")
+    p.set_defaults(fn=cmd_view)
 
     p = sub.add_parser("bench")
     p.add_argument("instance")
