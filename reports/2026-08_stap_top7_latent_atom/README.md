@@ -161,3 +161,25 @@ python scripts/stap_cpp_arms.py            # C++ fixed-pool arms
 python scripts/latent_atom_comparison.py   # k-sweep
 python scripts/build_top7_report.py        # this report
 ```
+
+## B5 scenario reuse: the lane where the frozen atom pays (new)
+
+Protocol: one full-pool base solve fixes the paper-faithful atom model
+(anchor + 6 majors + one FIXED nominal-share atom per OD, exactly the
+build_atom_model rule of stable_release/paper2_latent_atom); each perturbed
+scenario then re-solves warm in the compressed space vs a cold full-pool GP,
+both to represented-column gap 1e-6. Details: scenario_reuse.md.
+
+- **forge/ladder_grid20 (route-rich)**: compressed re-solves 2.0-3.8x faster,
+  objective error 1e-8..9e-6, and the speedup GROWS with perturbation
+  (demand x1.3: 3.83x). **Break-even including all setup: scenario 4.**
+- **sioux_falls (path-poor)**: 0.9-3.2x, break-even at scenario 7; the frozen
+  atom's objective error grows with drift (1.4e-4 at demand x1.3) — the
+  refresh threshold is measurable and sits near +/-20-30% demand drift.
+- Capacity-side scenarios benefit most (x2.4-3.5 on both instances): capacity
+  shocks reshuffle minor-path shares, exactly what the atom absorbs.
+
+This confirms the design argument for the Algorithm-B combination: the atom's
+payoff is in scenario reuse and dormant-alternative storage, not in one-shot
+solving. Next steps: O0+atom in the origin_bush harness (virtual column in
+the bush Newton swap) and orientation=destination for LUCE-style bushes.
