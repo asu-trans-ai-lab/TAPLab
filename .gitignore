@@ -5,3 +5,9 @@ build/
 dist/
 results/
 .venv/
+# keep the folder; data is imported locally and never committed
+tapbench/arc_atlanta_super600/*.csv
+tapbench/arc_atlanta_super600/reference/
+tapbench/arc_atlanta_super600/optional/
+tapbench/arc_atlanta_super600/*.yml
+tapbench/*/network_statistics.json

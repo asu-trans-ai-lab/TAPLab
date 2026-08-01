@@ -1,0 +1,5 @@
+node_id,node_type,zone_id,x_coord,y_coord
+1,centroid,1,0,0
+2,intersection,,1,1
+3,intersection,,1,-1
+4,centroid,4,2,0

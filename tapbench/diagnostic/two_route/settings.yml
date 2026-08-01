@@ -1,0 +1,3 @@
+cap_per_lane: no
+default_gap: 1e-8
+period: AM

@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+title: "TAPLab: An Open Laboratory for Reproducible Traffic Assignment Experiments"
+message: "If you use TAPLab, please cite it with the full subtitle."
+type: software
+authors:
+  - family-names: Zhou
+    given-names: Xuesong (Simon)
+    affiliation: Arizona State University
+version: 0.2.0
+date-released: 2026-07-31
+repository-code: "https://github.com/asu-trans-ai-lab/TAPLab"
+license: MIT
+keywords:
+  - traffic assignment
+  - user equilibrium
+  - GMNS
+  - benchmark
+  - reproducibility

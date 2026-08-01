@@ -1,10 +1,13 @@
 """TAPLab command-line interface.
 
-  taplab validate <instance_dir>
+  taplab stats <name|dir>
+  taplab validate <name|dir>
   taplab run <name|dir> --solver reference_fw [--algorithm fw] [--gap 1e-6]
+  taplab bench <name|dir> --solvers reference_fw,tapb
   taplab compare <name|dir> --solvers reference_fw,taplite
   taplab experiment <name|dir> --demand-scale 0.8,1.0,1.2 --capacity-scale 0.8,1.0
-  taplab reproduce <experiment.yml|results_dir>
+  taplab dashboard <name|dir>
+  taplab reproduce <instance_dir>
 """
 from __future__ import annotations
 
@@ -26,10 +29,38 @@ def _resolve(name_or_dir) -> Path:
     p = Path(name_or_dir)
     if p.exists():
         return p
-    cand = ROOT / "instances" / str(name_or_dir)
+    cand = ROOT / "tapbench" / str(name_or_dir)
     if cand.exists():
         return cand
     sys.exit(f"instance not found: {name_or_dir}")
+
+
+def cmd_stats(a):
+    from .stats import write_stats
+    inst = Instance.load(_resolve(a.instance))
+    print(json.dumps(write_stats(inst), indent=1))
+
+
+def cmd_dashboard(a):
+    from .dashboard import build_dashboard
+    inst_dir = _resolve(a.instance)
+    inst = Instance.load(inst_dir)
+    res = ROOT / "results" / inst_dir.name
+    out = build_dashboard(inst, res, res / "dashboard.html")
+    print(f"-> {out}")
+
+
+def cmd_bench(a):
+    """Run every named solver, then build the comparison dashboard."""
+    for sname in a.solvers.split(","):
+        a2 = argparse.Namespace(instance=a.instance, solver=sname.strip(),
+                                algorithm=a.algorithm, gap=a.gap,
+                                max_time=a.max_time)
+        try:
+            cmd_run(a2)
+        except Exception as e:  # keep the battery going past one failure
+            print(f"[bench] {sname} failed: {e}", file=sys.stderr)
+    cmd_dashboard(a)
 
 
 def cmd_validate(a):
@@ -106,6 +137,22 @@ def main():
     p = sub.add_parser("validate")
     p.add_argument("instance")
     p.set_defaults(fn=cmd_validate)
+
+    p = sub.add_parser("stats")
+    p.add_argument("instance")
+    p.set_defaults(fn=cmd_stats)
+
+    p = sub.add_parser("dashboard")
+    p.add_argument("instance")
+    p.set_defaults(fn=cmd_dashboard)
+
+    p = sub.add_parser("bench")
+    p.add_argument("instance")
+    p.add_argument("--solvers", default="reference_fw")
+    p.add_argument("--algorithm", default="fw")
+    p.add_argument("--gap", default="1e-4")
+    p.add_argument("--max-time", type=int, default=600)
+    p.set_defaults(fn=cmd_bench)
 
     for name, fn in [("run", cmd_run)]:
         p = sub.add_parser(name)

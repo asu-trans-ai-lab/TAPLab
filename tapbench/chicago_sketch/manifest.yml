@@ -1,0 +1,6 @@
+name: chicago_sketch
+title: Chicago Sketch (CATS sketch planning network)
+source: TNTP TransportationNetworks (bstabler) via GMNSforTAP conversion; best-known UE flows from ChicagoSketch_flow.tntp
+centroid_convention: node_type=centroid; node_id = zone_id for zones 1-387; connectors typed centroid_connector
+reference: reference/link_performance.csv = TNTP best-known UE volumes and costs
+license: research use per TransportationNetworks repository

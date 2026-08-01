@@ -1,0 +1,40 @@
+{
+  "_comment": "TAPLab solver registry. Executable locations are supplied per machine via environment variables (TAPLAB_TAPB_EXE, TAPLAB_TAPLITE_EXE, ...); this registry records capabilities and integration status only.",
+  "reference_fw": {
+    "family": "link_based", "algorithm": "Frank-Wolfe (pure Python)",
+    "input_format": "GMNS", "output_format": "GMNS",
+    "supports_convergence_history": true, "status": "verified"
+  },
+  "tapb:B": {
+    "family": "bush", "algorithm": "Algorithm B",
+    "input_format": "TNTP", "output_format": "tail_head_flow",
+    "supports_convergence_history": true, "status": "verified",
+    "provenance": "github.com/spartalab/tap-b (Boyles, UT Austin SPARTA)"
+  },
+  "taplite:FW": {
+    "family": "link_based", "algorithm": "Frank-Wolfe",
+    "input_format": "GMNS", "output_format": "GMNS",
+    "supports_convergence_history": true, "status": "available",
+    "provenance": "modified from Hillel Bar-Gera's tntp FW implementation"
+  },
+  "aequilibrae": {
+    "family": "link_based", "algorithm": "MSA / FW / CFW / BFW",
+    "input_format": "GMNS (in-memory)", "output_format": "GMNS",
+    "supports_convergence_history": true, "status": "available"
+  },
+  "task:TAPAS": {
+    "family": "bush", "algorithm": "TAPAS",
+    "input_format": "TNTP", "output_format": "native",
+    "supports_convergence_history": true, "status": "adapter_ready",
+    "note": "one remaining parser correction: generated TNTP trip tables must exactly match TAsK's expected spacing"
+  },
+  "task:LUCE": { "family": "origin_based", "algorithm": "LUCE", "input_format": "TNTP", "output_format": "native", "supports_convergence_history": true, "status": "adapter_ready" },
+  "task:GP": { "family": "path_based", "algorithm": "Gradient Projection", "input_format": "TNTP", "output_format": "native", "supports_convergence_history": true, "status": "adapter_ready" },
+  "task:B": { "family": "bush", "algorithm": "Algorithm B", "input_format": "TNTP", "output_format": "native", "supports_convergence_history": true, "status": "adapter_ready" },
+  "task:BFW": { "family": "link_based", "algorithm": "BFW", "input_format": "TNTP", "output_format": "native", "supports_convergence_history": true, "status": "adapter_ready" },
+  "opentnm:iTAPAS": { "family": "bush", "algorithm": "iTAPAS", "input_format": "native", "output_format": "native", "supports_convergence_history": true, "status": "registered" },
+  "opentnm:advanced": { "family": "other", "algorithm": "ALM-Greedy / C-BiTA / Greedy", "input_format": "native", "output_format": "native", "supports_convergence_history": true, "status": "registered" },
+  "origin_bush:O0": { "family": "origin_based", "algorithm": "Fixed-bush Newton", "input_format": "GMNS_TNTP", "output_format": "normalized_link_flow", "supports_convergence_history": true, "status": "registered" },
+  "origin_bush:P0": { "family": "path_based", "algorithm": "Explicit-path GP", "input_format": "GMNS_TNTP", "output_format": "normalized_link_flow", "supports_convergence_history": true, "status": "registered" },
+  "origin_bush:OL1": { "family": "compressed_origin_bush", "algorithm": "Latent-atom method", "input_format": "GMNS_TNTP", "output_format": "normalized_link_flow", "supports_convergence_history": true, "status": "registered_for_research_testing" }
+}

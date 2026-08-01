@@ -1,0 +1,5 @@
+name: two_route
+title: Two-route diagnostic (analytical 50/50 equilibrium)
+source: constructed
+reference: symmetric parallel routes; exact UE splits 2,000 trips as 1,000 per route
+license: CC0

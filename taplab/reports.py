@@ -88,7 +88,7 @@ def reproduce(target: Path, root: Path):
     stored reference outputs (the reproducibility check)."""
     from .instance import Instance
     from .adapters import reference_fw
-    inst_dir = target if (target / "node.csv").exists() else root / "instances" / target.name
+    inst_dir = target if (target / "node.csv").exists() else root / "tapbench" / target.name
     inst = Instance.load(inst_dir)
     out = reference_fw.solve(inst, gap=1e-6)
     tmp = inst_dir / "reference"

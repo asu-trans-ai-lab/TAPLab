@@ -69,18 +69,42 @@ def solve(instance, algorithm="B", gap=1e-6, max_time=600):
     t0 = time.time()
     r = subprocess.run([exe, "params.txt"], cwd=work, capture_output=True,
                        text=True, timeout=max_time + 120)
+    # BPR parameters keyed by GMNS link, to recover travel times from flows
+    bpr = {}
+    for lk in instance.links:
+        a, b = instance.link_key(lk)
+        fs = float(lk.get("free_speed") or 30) or 30
+        fftt = float(lk.get("vdf_fftt") or 0) or float(lk["length"]) / fs * 60.0
+        bpr[(a, b)] = (fftt, float(lk["capacity"]),
+                       float(lk.get("vdf_alpha") or 0.15),
+                       float(lk.get("vdf_beta") or 4.0))
     flows = []
     fp = work / f"{name}_flows.txt"
     if fp.exists():
+        # one record per "(tail,head) flow" line; this build repeats the flow
+        # on the following line, so only per-line matches are taken
         for line in fp.read_text().splitlines():
             m = re.match(r"\s*\((\d+),(\d+)\)\s+([\d.eE+-]+)", line)
-            if m:
-                flows.append(dict(from_node_id=inv[int(m.group(1))],
-                                  to_node_id=inv[int(m.group(2))],
-                                  volume=float(m.group(3)), travel_time=""))
-    gaps = re.findall(r"Iteration\s+(\d+):\s+gap\s+([\d.eE+-]+)", r.stdout)
-    return dict(flows=flows,
-                convergence=[(int(i), float(g), None) for i, g in gaps],
+            if not m:
+                continue
+            a, b = inv[int(m.group(1))], inv[int(m.group(2))]
+            v = float(m.group(3))
+            fftt, cap, al, be = bpr.get((a, b), (0.0, 1.0, 0.15, 4.0))
+            tt = fftt * (1.0 + al * (v / cap) ** be) if cap > 0 else fftt
+            flows.append(dict(from_node_id=a, to_node_id=b, volume=v,
+                              travel_time=round(tt, 6)))
+    gaps = re.findall(r"Iteration\s+(\d+):\s+gap\s+([\d.eE+-]+)",
+                      r.stdout or "")
+    if not gaps:  # some builds print "gap X" lines without iteration numbers
+        raw = re.findall(r"gap[:\s]+([\d.eE+-]+)", r.stdout or "", re.I)
+        gaps = list(enumerate((g for g in raw), start=1))
+    conv = [(int(i), float(g), None) for i, g in gaps]
+    tstt = sum(f["volume"] * f["travel_time"] for f in flows
+               if isinstance(f["travel_time"], float)) or None
+    return dict(flows=flows, convergence=conv,
                 summary=dict(solver="tapb", algorithm="B",
+                             iterations=conv[-1][0] if conv else None,
+                             relative_gap=conv[-1][1] if conv else None,
+                             tstt=round(tstt, 2) if tstt else None,
                              wall_time_s=round(time.time() - t0, 2),
                              workdir=str(work)))

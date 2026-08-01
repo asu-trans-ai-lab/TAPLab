@@ -12,7 +12,7 @@ from taplab.instance import Instance
 from taplab.validate import validate
 from taplab.adapters import reference_fw
 
-INST = ROOT / "instances" / "sioux_falls"
+INST = ROOT / "tapbench" / "sioux_falls"
 
 
 def test_validate_passes():
@@ -44,8 +44,27 @@ def test_flows_near_best_known():
     assert rmse / mean < 0.10, f"RMSE {rmse:.0f} vs mean {mean:.0f}"
 
 
+def test_two_route_analytical_split():
+    """Symmetric parallel routes must split 2,000 trips exactly 50/50."""
+    inst = Instance.load(ROOT / "tapbench" / "diagnostic" / "two_route")
+    out = reference_fw.solve(inst, gap=1e-8)
+    flows = {(f["from_node_id"], f["to_node_id"]): f["volume"]
+             for f in out["flows"]}
+    assert abs(flows[(1, 2)] - 1000.0) < 0.5, flows
+    assert abs(flows[(1, 3)] - 1000.0) < 0.5, flows
+
+
+def test_chicago_sketch_validates():
+    rep = validate(Instance.load(ROOT / "tapbench" / "chicago_sketch"))
+    assert rep["pass"], rep["errors"]
+    assert rep["info"]["zones"] == 387
+    assert rep["info"]["links"] == 2950
+
+
 if __name__ == "__main__":
     test_validate_passes()
     test_reference_fw_reproduces_summary()
     test_flows_near_best_known()
+    test_two_route_analytical_split()
+    test_chicago_sketch_validates()
     print("all smoke tests pass")
