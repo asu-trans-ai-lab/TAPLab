@@ -168,7 +168,7 @@ Protocol: one full-pool base solve fixes the paper-faithful atom model
 (anchor + 6 majors + one FIXED nominal-share atom per OD, exactly the
 build_atom_model rule of stable_release/paper2_latent_atom); each perturbed
 scenario then re-solves warm in the compressed space vs a cold full-pool GP,
-both to represented-column gap 1e-6. Details: scenario_reuse.md.
+both to represented-column gap 1e-6. Details: scenario_reuse.md. Log-scale performance charts: chart_reuse_sioux_log.svg, chart_reuse_grid20_log.svg (cumulative and per-scenario times with the break-even markers).
 
 - **forge/ladder_grid20 (route-rich)**: compressed re-solves 2.0-3.8x faster,
   objective error 1e-8..9e-6, and the speedup GROWS with perturbation
@@ -183,3 +183,15 @@ This confirms the design argument for the Algorithm-B combination: the atom's
 payoff is in scenario reuse and dormant-alternative storage, not in one-shot
 solving. Next steps: O0+atom in the origin_bush harness (virtual column in
 the bush Newton swap) and orientation=destination for LUCE-style bushes.
+
+
+## Origin-flow atom (definition locked; code paused pending confirmation)
+
+ORIGIN_ATOM_SPEC.md formalizes the origin atom as a COMPLETE feasible
+origin-flow template H_o^j in F_o = {x >= 0 : N x = b_o} — one template
+serves ALL destinations of origin o, and x^o = sum_j lambda_oj H_o^j stays
+feasible for any convex weights. This is a different object from the
+path-group OL1 tested so far; the spec includes the B0 / L1 / L2 experiment
+design (the honest question: can adaptive origin atoms reach B0-level
+solutions with significantly fewer full bush sweeps?) and five open design
+choices awaiting confirmation before any experiment code is written.
