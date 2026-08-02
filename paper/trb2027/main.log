@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.2.15)  1 AUG 2026 20:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.2.15)  1 AUG 2026 20:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -333,8 +333,8 @@ LaTeX Info: Redefining \[ on input line 2950.
 LaTeX Info: Redefining \] on input line 2951.
 )
 \@LN@amsmath@ams@eqpen=\count323
-LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 1
-8.
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 2
+2.
 
 (C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
@@ -346,24 +346,24 @@ File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 ) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -433,7 +433,7 @@ G,.JBIG2,.JB2,.eps]
 fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 18.
+Package hyperref Info: Link coloring OFF on input line 22.
  (main.out) (main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
@@ -441,12 +441,12 @@ Package hyperref Info: Link coloring OFF on input line 18.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
-Underfull \hbox (badness 10000) in paragraph at lines 28--33
+Underfull \hbox (badness 10000) in paragraph at lines 32--37
 
  []
 
 
-Overfull \hbox (14.34904pt too wide) in paragraph at lines 34--43
+Overfull \hbox (14.34904pt too wide) in paragraph at lines 38--47
 \OT1/ptm/m/it/10.95 Dis-clo-sure: gen-er-a-tive AI tools were used to as-sist c
 ode de-vel-op-ment, ex-per-i-ment or-ches-tra-tion, and manuscript
  []
@@ -456,13 +456,13 @@ ode de-vel-op-ment, ex-per-i-ment or-ches-tra-tion, and manuscript
 {C:/Users/xzhou/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/xzho
 u/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] [2]
 LaTeX Font Info:    Trying to load font information for OT1+phv on input line 9
-4.
+8.
 
 (C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
 [3] [4]
-Overfull \hbox (16.87508pt too wide) in paragraph at lines 252--262
+Overfull \hbox (16.87508pt too wide) in paragraph at lines 256--266
 \OT1/ptm/m/n/10.95 The lab-o-ra-tory records time-to-\OT1/ptm/m/it/10.95 verifi
 ed\OT1/ptm/m/n/10.95 -accuracy at com-mon tar-gets ($\OT1/cmr/m/n/10.95 10[]\OM
 L/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 10[]\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10
@@ -470,77 +470,77 @@ L/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 10[]\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10
  []
 
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 2
-82.
+86.
 (C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 [5]
-Underfull \hbox (badness 1286) in paragraph at lines 334--337
+Underfull \hbox (badness 1286) in paragraph at lines 338--341
 []\OT1/ptm/m/n/10 Washington DC city driv-ing layer (OSM-derived, SCC-
  []
 
 [6]
-Underfull \hbox (badness 3942) in paragraph at lines 392--393
+Underfull \hbox (badness 3942) in paragraph at lines 396--397
 []\OT1/ptm/m/n/10 equilibrium paths route through
  []
 
 
-Underfull \hbox (badness 1303) in paragraph at lines 392--393
+Underfull \hbox (badness 1303) in paragraph at lines 396--397
 \OT1/ptm/m/n/10 from best-known at self-reported
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 393--395
+Underfull \hbox (badness 10000) in paragraph at lines 397--399
 []\OT1/ptm/m/n/10 certified com-par-i-son to best-
  []
 
 
-Underfull \hbox (badness 1742) in paragraph at lines 395--396
+Underfull \hbox (badness 1742) in paragraph at lines 399--400
 \OT1/ptm/m/n/10 to a solver's in-ter-nal \OT1/ptm/m/sc/10 ar-ti-fi-
  []
 
 
-Underfull \hbox (badness 2735) in paragraph at lines 396--397
+Underfull \hbox (badness 2735) in paragraph at lines 400--401
 []\OT1/ptm/m/n/10 all 482 connector-incident flows
  []
 
 
-Underfull \hbox (badness 1354) in paragraph at lines 397--399
+Underfull \hbox (badness 1354) in paragraph at lines 401--403
 []\OT1/ptm/m/n/10 conservation resid-ual of 10,710
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 399--400
+Underfull \hbox (badness 10000) in paragraph at lines 403--404
 []\OT1/ptm/m/n/10 Fixed-decimal ex-port ($\OT1/cmr/m/n/10 10[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 399--400
+Underfull \hbox (badness 10000) in paragraph at lines 403--404
 \OT1/ptm/m/n/10 free-flow time printed as
  []
 
 
-Underfull \hbox (badness 7759) in paragraph at lines 399--400
+Underfull \hbox (badness 7759) in paragraph at lines 403--404
 \OT1/ptm/m/n/10 0.000000; $\OT1/cmr/m/n/10 10[]$\OT1/ptm/m/n/10 -scale al-phas
  []
 
 
-Underfull \hbox (badness 7925) in paragraph at lines 400--402
+Underfull \hbox (badness 7925) in paragraph at lines 404--406
 []\OT1/ptm/m/n/10 the cor-rupted net-work's wrong
  []
 
 
-Underfull \hbox (badness 2165) in paragraph at lines 404--405
+Underfull \hbox (badness 2165) in paragraph at lines 408--409
 []\OT1/ptm/m/n/10 parser al-lo-cates a node per tail
  []
 
 
-Underfull \hbox (badness 1466) in paragraph at lines 404--405
+Underfull \hbox (badness 1466) in paragraph at lines 408--409
 \OT1/ptm/m/n/10 change and aborts: ``num-ber of
  []
 
 
-Underfull \hbox (badness 1490) in paragraph at lines 408--409
+Underfull \hbox (badness 1490) in paragraph at lines 412--413
 []\OT1/ptm/m/n/10 OD parser seg-men-ta-tion fault at
  []
 
@@ -548,13 +548,13 @@ Underfull \hbox (badness 1490) in paragraph at lines 408--409
 <figs/chart_race.pdf, id=130, 686.565pt x 347.37779pt>
 File: figs/chart_race.pdf Graphic file (type pdf)
 <use figs/chart_race.pdf>
-Package pdftex.def Info: figs/chart_race.pdf  used on input line 447.
+Package pdftex.def Info: figs/chart_race.pdf  used on input line 451.
 (pdftex.def)             Requested size: 469.75502pt x 237.67671pt.
  [8 <./figs/chart_race.pdf>]
 <figs/chart_isolation.pdf, id=152, 686.565pt x 347.37779pt>
 File: figs/chart_isolation.pdf Graphic file (type pdf)
 <use figs/chart_isolation.pdf>
-Package pdftex.def Info: figs/chart_isolation.pdf  used on input line 541.
+Package pdftex.def Info: figs/chart_isolation.pdf  used on input line 545.
 (pdftex.def)             Requested size: 399.29463pt x 202.0252pt.
 
 
