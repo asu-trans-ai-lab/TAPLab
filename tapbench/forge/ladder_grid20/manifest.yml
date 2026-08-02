@@ -1,0 +1,14 @@
+name: ladder_grid20
+generator: TAPForge
+track: A2/A3
+type: grid
+n: 20
+pattern: uniform
+origins: 8
+dests_per_origin: 8
+corridors: 2
+barrier: True
+braess_diagonal: True
+perturb: 0.01
+congestion: high
+seed: 11

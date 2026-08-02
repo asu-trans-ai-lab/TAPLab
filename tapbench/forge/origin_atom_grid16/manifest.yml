@@ -1,0 +1,15 @@
+name: origin_atom_grid16
+generator: TAPForge
+track: A2/A3
+type: grid
+n: 16
+pattern: one2many
+origins: 0
+dests_per_origin: 16
+corridors: 0
+barrier: False
+braess_diagonal: False
+perturb: 0.0
+congestion: medium
+seed: 5
+monotone: True

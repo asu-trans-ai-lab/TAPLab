@@ -17,7 +17,7 @@ def _to_tntp(instance, work, name):
     others = [int(float(n["node_id"])) for n in instance.nodes
               if int(float(n["node_id"])) not in set(zone_nodes)]
     renum = {n: i for i, n in enumerate(zone_nodes + others, start=1)}
-    lines = []
+    recs = []
     for r in instance.links:
         a, b = instance.link_key(r)
         cap = float(r["capacity"])
@@ -30,10 +30,15 @@ def _to_tntp(instance, work, name):
         fftt = float(r.get("vdf_fftt") or 0) or length / fs * 60.0
         B = float(r.get("vdf_alpha") or 0.15)
         P = float(r.get("vdf_beta") or 4.0)
-        # full-precision %g: fixed-decimal formats silently zero out tiny
-        # authoritative values (e.g. Braess fftt = 1e-8, Winnipeg alphas)
-        lines.append(f"\t{renum[a]}\t{renum[b]}\t{cap:.12g}\t{length:.12g}"
-                     f"\t{fftt:.12g}\t{B:.12g}\t{P:.12g}\t{fs:.6g}\t0\t1\t;")
+        recs.append((renum[a], renum[b], cap, length, fftt, B, P, fs))
+    # forward-star order (sorted by tail): TAsK's parser allocates a node
+    # each time the tail changes, so tails must appear contiguously
+    recs.sort()
+    # full-precision %g: fixed-decimal formats silently zero out tiny
+    # authoritative values (e.g. Braess fftt = 1e-8, Winnipeg alphas)
+    lines = [f"\t{a}\t{b}\t{cap:.12g}\t{length:.12g}"
+             f"\t{fftt:.12g}\t{B:.12g}\t{P:.12g}\t{fs:.6g}\t0\t1\t;"
+             for a, b, cap, length, fftt, B, P, fs in recs]
     netdir = work / "net"
     netdir.mkdir(exist_ok=True)
     # dedicated centroids must not carry through traffic: when the network

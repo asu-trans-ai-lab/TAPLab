@@ -1,0 +1,9 @@
+name: sts5x20_s1
+generator: TAPForge
+track: A4
+type: sts
+n: 5
+T: 20
+congestion: high
+seed: 1
+perturb: 0.0
