@@ -11,3 +11,7 @@ tapbench/arc_atlanta_super600/reference/
 tapbench/arc_atlanta_super600/optional/
 tapbench/arc_atlanta_super600/*.yml
 tapbench/*/network_statistics.json
+
+# internal content lives in TAPLab-internal (private), never here
+paper/
+reports/
