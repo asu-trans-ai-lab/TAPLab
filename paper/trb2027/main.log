@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.2.15)  1 AUG 2026 10:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.2.15)  1 AUG 2026 20:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -8,8 +8,8 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
 (C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
 Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
-(C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/latex/base\size12.clo
-File: size12.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
+(C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/latex/base\size11.clo
+File: size11.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count275
 \c@section=\count276
@@ -264,8 +264,77 @@ Package caption Info: Standard document class detected.
 \c@continuedfloat=\count310
 Package caption Info: hyperref package is loaded.
 )
+(C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2025/07/09 v2.17z AMS math features
+\@mathmargin=\skip52
+
+For additional information on amsmath, use the `?' option.
+(C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+Package: amstext 2024/11/17 v2.01 AMS text
+
+(C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks20
+\ex@=\dimen189
+))
+(C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen190
+)
+(C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count311
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count312
+\leftroot@=\count313
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count314
+\DOTSCASE@=\count315
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box54
+\strutbox@=\box55
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen191
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count316
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count317
+\dotsspace@=\muskip18
+\c@parentequation=\count318
+\dspbrk@lvl=\count319
+\tag@help=\toks21
+\row@=\count320
+\column@=\count321
+\maxfields@=\count322
+\andhelp@=\toks22
+\eqnshift@=\dimen192
+\alignsep@=\dimen193
+\tagshift@=\dimen194
+\tagwidth@=\dimen195
+\totwidth@=\dimen196
+\lineht@=\dimen197
+\@envbody=\toks23
+\multlinegap=\skip53
+\multlinetaggap=\skip54
+\mathdisplay@stack=\toks24
+LaTeX Info: Redefining \[ on input line 2950.
+LaTeX Info: Redefining \] on input line 2951.
+)
+\@LN@amsmath@ams@eqpen=\count323
 LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 1
-7.
+8.
 
 (C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
@@ -273,28 +342,28 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 (C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
 tex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count311
+\l__color_backend_stack_int=\count324
 ) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -315,12 +384,12 @@ LaTeX Font Info:    ... okay on input line 17.
 * \topmargin=-37.0pt
 * \headheight=12.0pt
 * \headsep=25.0pt
-* \topskip=12.0pt
+* \topskip=11.0pt
 * \footskip=30.0pt
-* \marginparwidth=44.0pt
+* \marginparwidth=59.0pt
 * \marginparsep=10.0pt
 * \columnsep=10.0pt
-* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -334,29 +403,37 @@ LaTeX Font Info:    ... okay on input line 17.
 (C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count312
-\scratchdimen=\dimen189
-\scratchbox=\box54
-\nofMPsegments=\count313
-\nofMParguments=\count314
-\everyMPshowfont=\toks20
-\MPscratchCnt=\count315
-\MPscratchDim=\dimen190
-\MPnumerator=\count316
-\makeMPintoPDFobject=\count317
-\everyMPtoPDFconversion=\toks21
+\scratchcounter=\count325
+\scratchdimen=\dimen198
+\scratchbox=\box56
+\nofMPsegments=\count326
+\nofMParguments=\count327
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count328
+\MPscratchDim=\dimen199
+\MPnumerator=\count329
+\makeMPintoPDFobject=\count330
+\everyMPtoPDFconversion=\toks26
 )
 (C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
 ase.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+
+(C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/latex/grfext\grfext.sty
+Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
+)
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 504.
 
 (C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.c
 fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 17.
+Package hyperref Info: Link coloring OFF on input line 18.
  (main.out) (main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
@@ -364,113 +441,161 @@ Package hyperref Info: Link coloring OFF on input line 17.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
-Underfull \hbox (badness 10000) in paragraph at lines 27--32
+Underfull \hbox (badness 10000) in paragraph at lines 28--33
 
  []
 
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 33.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 33.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 33.
+
+Overfull \hbox (14.34904pt too wide) in paragraph at lines 34--43
+\OT1/ptm/m/it/10.95 Dis-clo-sure: gen-er-a-tive AI tools were used to as-sist c
+ode de-vel-op-ment, ex-per-i-ment or-ches-tra-tion, and manuscript
+ []
+
 [1
 
 {C:/Users/xzhou/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/xzho
 u/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] [2]
-LaTeX Font Info:    Trying to load font information for OT1+phv on input line 8
-2.
+LaTeX Font Info:    Trying to load font information for OT1+phv on input line 9
+4.
 
 (C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
-[3]
-Overfull \hbox (11.53604pt too wide) in paragraph at lines 140--148
-\OT1/ptm/m/n/12 [Components: TAP-Bench (tiered in-stances), TAP-Forge (para-met
--ric gen-er-a-tor: an-a-lyt-i-cal, Manhattan-
+[3] [4]
+Overfull \hbox (16.87508pt too wide) in paragraph at lines 252--262
+\OT1/ptm/m/n/10.95 The lab-o-ra-tory records time-to-\OT1/ptm/m/it/10.95 verifi
+ed\OT1/ptm/m/n/10.95 -accuracy at com-mon tar-gets ($\OT1/cmr/m/n/10.95 10[]\OM
+L/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 10[]\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10
+.95 10[]$\OT1/ptm/m/n/10.95 ) to-gether with algorithm-
  []
 
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 158.
-
-Underfull \hbox (badness 10000) in paragraph at lines 162--162
-[]\OT1/ptm/m/n/10.95 First-through-node de-fault
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 2
+82.
+(C:\Users\xzhou\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+[5]
+Underfull \hbox (badness 1286) in paragraph at lines 334--337
+[]\OT1/ptm/m/n/10 Washington DC city driv-ing layer (OSM-derived, SCC-
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 162--162
-\OT1/ptm/m/n/10.95 lets paths route through
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 164--165
-[]\OT1/ptm/m/n/10.95 Certified gap vs. best-known
- []
-
-
-Underfull \hbox (badness 1142) in paragraph at lines 169--171
-[]\OT1/ptm/m/n/10.95 Recomputed gap 0.24 vs. self-
+[6]
+Underfull \hbox (badness 3942) in paragraph at lines 392--393
+[]\OT1/ptm/m/n/10 equilibrium paths route through
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 171--171
-[]\OT1/ptm/m/n/10.95 Links not grouped in
+Underfull \hbox (badness 1303) in paragraph at lines 392--393
+\OT1/ptm/m/n/10 from best-known at self-reported
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 171--172
-[]\OT1/ptm/m/n/10.95 Parser over-allocates nodes;
+Underfull \hbox (badness 10000) in paragraph at lines 393--395
+[]\OT1/ptm/m/n/10 certified com-par-i-son to best-
  []
 
-<figs/chart_race.pdf, id=67, 686.565pt x 347.37779pt>
+
+Underfull \hbox (badness 1742) in paragraph at lines 395--396
+\OT1/ptm/m/n/10 to a solver's in-ter-nal \OT1/ptm/m/sc/10 ar-ti-fi-
+ []
+
+
+Underfull \hbox (badness 2735) in paragraph at lines 396--397
+[]\OT1/ptm/m/n/10 all 482 connector-incident flows
+ []
+
+
+Underfull \hbox (badness 1354) in paragraph at lines 397--399
+[]\OT1/ptm/m/n/10 conservation resid-ual of 10,710
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 399--400
+[]\OT1/ptm/m/n/10 Fixed-decimal ex-port ($\OT1/cmr/m/n/10 10[]$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 399--400
+\OT1/ptm/m/n/10 free-flow time printed as
+ []
+
+
+Underfull \hbox (badness 7759) in paragraph at lines 399--400
+\OT1/ptm/m/n/10 0.000000; $\OT1/cmr/m/n/10 10[]$\OT1/ptm/m/n/10 -scale al-phas
+ []
+
+
+Underfull \hbox (badness 7925) in paragraph at lines 400--402
+[]\OT1/ptm/m/n/10 the cor-rupted net-work's wrong
+ []
+
+
+Underfull \hbox (badness 2165) in paragraph at lines 404--405
+[]\OT1/ptm/m/n/10 parser al-lo-cates a node per tail
+ []
+
+
+Underfull \hbox (badness 1466) in paragraph at lines 404--405
+\OT1/ptm/m/n/10 change and aborts: ``num-ber of
+ []
+
+
+Underfull \hbox (badness 1490) in paragraph at lines 408--409
+[]\OT1/ptm/m/n/10 OD parser seg-men-ta-tion fault at
+ []
+
+[7]
+<figs/chart_race.pdf, id=130, 686.565pt x 347.37779pt>
 File: figs/chart_race.pdf Graphic file (type pdf)
 <use figs/chart_race.pdf>
-Package pdftex.def Info: figs/chart_race.pdf  used on input line 188.
+Package pdftex.def Info: figs/chart_race.pdf  used on input line 447.
 (pdftex.def)             Requested size: 469.75502pt x 237.67671pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[4]
-<figs/chart_isolation.pdf, id=80, 686.565pt x 347.37779pt>
+ [8 <./figs/chart_race.pdf>]
+<figs/chart_isolation.pdf, id=152, 686.565pt x 347.37779pt>
 File: figs/chart_isolation.pdf Graphic file (type pdf)
 <use figs/chart_isolation.pdf>
-Package pdftex.def Info: figs/chart_isolation.pdf  used on input line 209.
+Package pdftex.def Info: figs/chart_isolation.pdf  used on input line 541.
 (pdftex.def)             Requested size: 399.29463pt x 202.0252pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[5 <./figs/chart_race.pdf>] [6 <./figs/chart_isolation.pdf>] [7] (main.aux)
+[9] [10 <./figs/chart_isolation.pdf>] [11] [12] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 554ABD0093E13D285664133F927CB43E;2390.
+(rerunfilecheck)             Checksum: B4FE89B6F01D0941986D010CA427F811;3989.
  ) 
 Here is how much of TeX's memory you used:
- 10761 strings out of 467871
- 174075 string characters out of 5418376
- 593516 words of memory out of 5000000
- 39507 multiletter control sequences out of 15000+600000
- 647090 words of font info for 72 fonts, out of 8000000 for 9000
+ 11573 strings out of 467871
+ 185319 string characters out of 5418376
+ 609688 words of memory out of 5000000
+ 40272 multiletter control sequences out of 15000+600000
+ 649544 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 69i,12n,79p,415b,532s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 69i,12n,79p,459b,533s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/xzhou/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
-cmmi10.pfb><C:/Users/xzhou/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmmi12.pfb><C:/Users/xzhou/AppData/Local/Programs/MiKTeX/fonts/type1/p
-ublic/amsfonts/cm/cmr10.pfb><C:/Users/xzhou/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/xzhou/AppData/Local/Programs/MiKT
-eX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/xzhou/AppData/Local/Progra
-ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/xzhou/AppData/Loc
-al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/xzhou/App
-Data/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Users/xzhou/
-AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/xzhou/
-AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/xzhou/
-AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (7 pages, 260488 bytes).
+cmex10.pfb><C:/Users/xzhou/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmmi10.pfb><C:/Users/xzhou/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmmi7.pfb><C:/Users/xzhou/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/xzhou/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/xzhou/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/xzhou/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/xzhou/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/xz
+hou/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/
+Users/xzhou/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.
+pfb><C:/Users/xzhou/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8
+a.pfb><C:/Users/xzhou/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uh
+vr8a.pfb><C:/Users/xzhou/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/ut
+mb8a.pfb><C:/Users/xzhou/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/ut
+mr8a.pfb><C:/Users/xzhou/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/ut
+mri8a.pfb>
+Output written on main.pdf (12 pages, 338494 bytes).
 PDF statistics:
- 179 PDF objects out of 1000 (max. 8388607)
- 26 named destinations out of 1000 (max. 500000)
- 99 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 263 PDF objects out of 1000 (max. 8388607)
+ 45 named destinations out of 1000 (max. 500000)
+ 155 words of extra memory for PDF output out of 10000 (max. 10000000)
 
