@@ -55,7 +55,7 @@ def cmd_verify(a):
     from .verify import verify
     inst_dir = _resolve(a.instance)
     inst = Instance.load(inst_dir)
-    lp = ROOT / "results" / inst_dir.name / a.solver / "link_performance.csv"
+    lp = ROOT / "results" / inst_dir.name / a.solver.replace(":", "_") / "link_performance.csv"
     if not lp.exists():
         sys.exit(f"no run found: {lp}")
     self_gap = None
@@ -115,9 +115,11 @@ def cmd_run(a):
     if not rep["pass"]:
         sys.exit("validation failed:\n" + "\n".join(rep["errors"]))
     mod = adapters.get(a.solver)
-    out = mod.solve(inst, algorithm=a.algorithm, gap=float(a.gap),
+    _, salg = adapters.split_solver(a.solver)
+    algorithm = salg or a.algorithm
+    out = mod.solve(inst, algorithm=algorithm, gap=float(a.gap),
                     max_time=a.max_time)
-    outdir = ROOT / "results" / inst_dir.name / a.solver
+    outdir = ROOT / "results" / inst_dir.name / a.solver.replace(":", "_")
     outdir.mkdir(parents=True, exist_ok=True)
     with open(outdir / "link_performance.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["link_id", "from_node_id",
