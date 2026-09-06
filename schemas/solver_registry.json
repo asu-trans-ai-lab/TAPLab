@@ -25,7 +25,7 @@
   "supports_convergence_history": true,
   "status": "registered",
   "provenance": "modified from Hillel Bar-Gera's tntp FW implementation",
-  "note": "adapter present; not yet smoke-tested in TAPLab"
+  "note": "adapter maps --algorithm fw|cfw|bfw|b to settings assignment_method 0/1/2/3 and --gap to convergence_gap_pct; convergence history from the kernel's convergence_log.csv"
  },
  "aequilibrae": {
   "family": "link_based",
@@ -104,7 +104,7 @@
   "output_format": "normalized_link_flow",
   "supports_convergence_history": true,
   "status": "external_only",
-  "note": "controlled monotone-grid harness (origin_bush.exe); generates its own instances \u2014 research lane, not a TAPBench adapter. Native generalization: latent_gp"
+  "note": "controlled monotone-grid harness (origin_bush.exe); generates its own instances — research lane, not a TAPBench adapter. Native generalization: latent_gp"
  },
  "origin_bush:P0": {
   "family": "path_based",
@@ -113,7 +113,7 @@
   "output_format": "normalized_link_flow",
   "supports_convergence_history": true,
   "status": "external_only",
-  "note": "controlled monotone-grid harness (origin_bush.exe); generates its own instances \u2014 research lane, not a TAPBench adapter. Native generalization: latent_gp"
+  "note": "controlled monotone-grid harness (origin_bush.exe); generates its own instances — research lane, not a TAPBench adapter. Native generalization: latent_gp"
  },
  "origin_bush:OL1": {
   "family": "compressed_origin_bush",
@@ -122,7 +122,7 @@
   "output_format": "normalized_link_flow",
   "supports_convergence_history": true,
   "status": "external_only",
-  "note": "controlled monotone-grid harness (origin_bush.exe); generates its own instances \u2014 research lane, not a TAPBench adapter. Native generalization: latent_gp"
+  "note": "controlled monotone-grid harness (origin_bush.exe); generates its own instances — research lane, not a TAPBench adapter. Native generalization: latent_gp"
  },
  "latent_gp:P0": {
   "family": "path_based",
@@ -142,5 +142,35 @@
   "status": "verified",
   "provenance": "native TAPLab generalization of OL1 from the controlled monotone-grid experiment to arbitrary networks",
   "note": "work counters: shortest_path_calls, columns_generated/folded, latent_atoms"
+ },
+ "taplite:CFW": {
+  "family": "link_based",
+  "algorithm": "Conjugate Frank-Wolfe",
+  "input_format": "GMNS",
+  "output_format": "GMNS",
+  "supports_convergence_history": true,
+  "status": "registered",
+  "provenance": "modified from Hillel Bar-Gera's tntp FW implementation",
+  "note": "same adapter, assignment_method 1"
+ },
+ "taplite:BFW": {
+  "family": "link_based",
+  "algorithm": "Biconjugate Frank-Wolfe",
+  "input_format": "GMNS",
+  "output_format": "GMNS",
+  "supports_convergence_history": true,
+  "status": "registered",
+  "provenance": "modified from Hillel Bar-Gera's tntp FW implementation",
+  "note": "same adapter, assignment_method 2"
+ },
+ "taplite:B": {
+  "family": "bush",
+  "algorithm": "Algorithm B (origin-based bush, Newton segment shift)",
+  "input_format": "GMNS",
+  "output_format": "GMNS",
+  "supports_convergence_history": true,
+  "status": "registered",
+  "provenance": "modified from Hillel Bar-Gera's tntp FW implementation",
+  "note": "same adapter, assignment_method 3; under development on the TAPLite4MPO origin-based line (steps B0-B6)"
  }
 }

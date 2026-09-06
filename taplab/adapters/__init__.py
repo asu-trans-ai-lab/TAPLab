@@ -5,7 +5,14 @@ from __future__ import annotations
 from . import latent_gp, reference_fw
 
 
+def split_solver(name: str):
+    """'taplite:B' -> ('taplite', 'b'); 'taplite' -> ('taplite', None)."""
+    base, _, alg = (name or "").partition(":")
+    return base.strip(), (alg.strip().lower() or None)
+
+
 def get(name: str):
+    name, _ = split_solver(name)
     if name == "reference_fw":
         return reference_fw
     if name == "latent_gp":
